@@ -1,0 +1,142 @@
+html, 
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family:	"Helvetica Neue"
+					"Open Sans",
+					sans-serif;
+	font-size: 15px;
+	background: #1F1F1F;
+}
+
+.wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	text-align: center;
+}
+
+.form {
+	position: relative;
+	width: 300px;
+	height: auto;
+	margin: 50px auto;
+	padding: 10px 0;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	        border-radius: 6px;
+}
+
+.header {
+	width: 300px;
+	height: auto;
+	margin: 0px auto;
+	padding-top: 40px;
+	text-align: center;
+	color: #1F1F1F;
+	font-weight: 300;
+}
+
+span {
+	margin-top: 20px;
+	color: #ffffff;
+	font-size: 25px;
+	font-weight: 300;
+}
+
+p {
+	display: inline-block;
+	width: 300px;
+	margin: 0px auto;
+	margin-bottom: 17px;
+	color: #1F1F1F;
+	text-align: center;
+	font-size: 15px;
+	font-weight: 300;
+}
+.button {
+	display: block;
+	width: 230px;
+	height: 45px;
+	margin: 20px auto;
+	padding-left: 10px;
+	-webkit-border-radius: 4px;
+	        border-radius: 4px;
+	cursor: pointer;
+}
+
+.facebook {
+	background-color: #A0BBD6;
+	-webkit-transition: background-color .2s ease;
+	        transition: background-color .2s ease;
+}
+
+.facebook:hover {
+	background-color: #88a5c2;
+}
+
+input[type=text] {
+	background: url(http://imageshack.com/a/img812/1096/y67f.png) no-repeat 10px center;
+}
+
+input[type=password] {
+	position: relative;
+	top: 5px;
+	background: url(http://imageshack.com/a/img812/6980/lcnq.png) no-repeat 10px center;
+}
+
+input[type=text], input[type=password] {
+	display: block;
+	width: 190px;
+	height: 40px;
+	margin: 0 auto;
+	padding: 2px 0 2px 45px;
+	border: 2px solid #ffff92;
+	-webkit-border-radius: 4px;
+	        border-radius: 4px;
+	font-size: 15px;
+	font-weight: 300;
+	color: #1F1F1F;
+	-webkit-background-size: 20px;
+	        background-size: 20px;
+	-webkit-transition: background-color .2s ease;
+	        transition: background-color .2s ease;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+	outline: none;
+	border-color: #fee23e;
+}
+
+img	{
+	display: block;
+	width: 25px;
+	height: auto;
+    margin: 0 auto;
+}	
+
+.facebook img {
+	padding-top: 10px;
+}
+
+.submit {
+	margin-top: 30px;
+	background-color: #585858;
+	text-align: center;
+	-webkit-transition: background-color .2s ease;
+	        transition: background-color .2s ease;
+}
+
+.submit p {
+	padding-top: 13px;
+	margin-left: -40px;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.submit:hover {
+	background-color: #484848;
+}
+

@@ -1,1 +1,167 @@
-/* css */
+* {
+	margin: 0px;
+	border: 0px;
+	outline: 0px;
+	padding: 0px;
+}
+
+html,
+body {
+	font-family:	"Helvetica Neue",
+					Tahoma,
+					sans-serif;
+	font-size: 13px;
+	background: url("../img/bg.jpg") fixed center center;
+	background-size: cover;
+	-o-background-size: cover;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	color: #404d53;
+}
+
+a {
+	text-decoration: none;
+	color: #576e85;
+}
+
+a:hover {
+	color: #fff000;
+}
+
+.wrapper {
+	max-width: 980px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0px auto;
+	padding: 0px 15px;
+	overflow: hidden;
+}
+
+header {
+	padding: 40px;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+header a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	float: left;
+}
+
+header .logo {
+	background: url("../img/logo.svg") no-repeat top center;
+	width: 75px;
+	height: 81px;
+	display: block;
+	margin-right: 30px;
+	margin-top: 5px;
+	float: left;
+}
+
+header h1 {
+	font-size: 52px;
+	font-weight: 100 !important;
+}
+
+header span {
+	font-weight: 300;
+	font-size: 24px;
+}
+
+header a.button {
+	float: right;
+}
+
+a.button {
+	display: inline-block;
+	min-width: 80px;
+	padding: 10px 10px;
+	background: #fff000;
+	margin-top: 35px;
+	border-radius: 4px;
+	color: #404d53;
+	text-align: center;
+	font-size: 16px;
+}
+
+nav {
+	background: #2e3236;
+}
+	
+nav a {
+	color: #fff;
+	font-size: 24px;
+	font-weight: 300;
+	margin-right: 40px;
+	padding: 14px 0px 10px 0px;
+	text-decoration: none;
+	display: inline-block;
+	border-bottom: 4px solid transparent;
+}
+
+nav a:hover {
+	color: #fff000;
+}
+
+nav a:active {
+	border-bottom: 4px solid #fff000;
+}
+
+main {
+	min-height: 800px;
+	background: #f7f6f3;
+}
+
+.line {
+	display: block;
+	width: 100%;
+	float: left;
+}
+
+.line:first-child {
+	margin-top: 10px;
+}
+
+.line:last-child {
+	margin-bottom: 10px;
+}
+
+article .block {
+	display: block;
+	float: left;
+	width: 31.29999%;
+	margin-right: 3%;
+	background: #fff;
+	min-height: 200px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+article .block:last-child {
+	margin-right: 0%;
+}
+
+.artwork {
+	width: 100%;
+	height: 200px;
+	overflow: hidden;
+}
+
+.artwork img {
+	display: block;
+	margin: 0px auto;
+}
+
+.block span {
+	display: block;
+	float: left;
+	padding: 15px 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
