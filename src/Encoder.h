@@ -18,19 +18,19 @@ string exec(const char* cmd) {
     return result;
 }
 
-void directs () {
-	system("rm -r 720");
-	system("rm -r 360");
-	system("rm -r 240");
+void directs (string _output) {
+	system(output + "rm -r 720");
+	system(output + "rm -r 360");
+	system(output + "rm -r 240");
 
-	system("mkdir 720");
-	system("mkdir 360");
-	system("mkdir 240");
+	system(output + "mkdir 720");
+	system(output + "mkdir 360");
+	system(output + "mkdir 240");
 }
 
 int convertVideo(int _time, string path, string output){
 	
-	directs ();
+	directs (output);
 	string command;
 	const char * _c;
 
@@ -44,7 +44,7 @@ int convertVideo(int _time, string path, string output){
 	int chunks = int(temp + 1);
 	cout << chunks << endl;
 
-	command = "./ffmpeg -i " + path + " -r 1 -t 1 -ss 00:00:05 preview.jpeg";
+	command = "./ffmpeg -i " + path + " -r 1 -t 1 -ss 00:00:05 " + output + "preview.jpeg";
 	_c = command.c_str();
 	system(_c);	
 
