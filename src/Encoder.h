@@ -19,13 +19,13 @@ string exec(const char* cmd) {
 }
 
 void directs (string _output) {
-	system(output + "rm -r 720");
-	system(output + "rm -r 360");
-	system(output + "rm -r 240");
+	system("rm -r " + _output + "720");
+	system("rm -r " + _output + "360");
+	system("rm -r " + _output + "240");
 
-	system(output + "mkdir 720");
-	system(output + "mkdir 360");
-	system(output + "mkdir 240");
+	system("mkdir " + _output + "720");
+	system("mkdir " + _output + "360");
+	system("mkdir " + _output + "240");
 }
 
 int convertVideo(int _time, string path, string output){
