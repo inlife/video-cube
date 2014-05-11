@@ -28,7 +28,7 @@ void directs () {
 	system("mkdir 240");
 }
 
-bool convertVideo(int _time, string path, string output){
+int convertVideo(int _time, string path, string output){
 	
 	directs ();
 	string command;
@@ -66,5 +66,5 @@ bool convertVideo(int _time, string path, string output){
 		system(_c);
 	}
 
-	return true;
+	return chunks;
 }
