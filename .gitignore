@@ -13,3 +13,5 @@
 *.lai
 *.la
 *.a
+
+app/boost/*

@@ -1,7 +1,4 @@
 $(function () {
-	$("a").click(function(e) { 
-		e.preventDefault(); 
-	});
 
 	function Scroll() {
 		var wnd = $(window).scrollTop();

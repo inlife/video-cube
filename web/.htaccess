@@ -1,0 +1,16 @@
+DirectoryIndex app.cgi
+
+<IfModule mod_rewrite.c>
+    #RewriteEngine On
+
+    #RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    #RewriteRule ^(.*) - [E=BASE:%1]
+  
+    #RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    #RewriteRule ^app\.cgi(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+
+    #RewriteCond %{REQUEST_FILENAME} -f
+    #RewriteRule .? - [L]
+
+    #RewriteRule .? %{ENV:BASE}/app.cgi [L]
+</IfModule>

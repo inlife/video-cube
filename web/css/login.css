@@ -140,3 +140,21 @@ img	{
 	background-color: #484848;
 }
 
+.delim {
+	position: absolute;
+	margin-left: 325px;
+	color: #fff;
+}
+
+.form-container {
+	width: 700px;
+	margin: 100px auto;
+}
+
+.login-block {
+	float: left;
+}
+
+.register-block {
+	float: right;
+}
