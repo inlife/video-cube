@@ -14,6 +14,7 @@
 
 #include "Cooper/NotFoundException.cpp"
 #include "Cooper/InternalErrorException.cpp"
+#include "Cooper/FormException.cpp"
 #include "Cooper/ParameterBag.cpp"
 #include "Cooper/Controller.cpp"
 #include "Cooper/Http.cpp"
@@ -44,6 +45,7 @@ const std::string ENV[ 24 ] = {
 int main() {
     
     loadParams();
+    
     Cooper::Http::_router router = loadRouting();
 	Cooper::Http::ParameterBag params = Cooper::Http::get();
 
@@ -53,13 +55,20 @@ int main() {
 		} else {
 			throw Cooper::Exceptions::NotFoundException();
 		}
-	} catch (Cooper::Exceptions::NotFoundException &e) {
+	} catch (Cooper::Exceptions::FormException &e) {
+
+        std::cout << e.getMessage() << std::endl;
+
+    } catch (Cooper::Exceptions::NotFoundException &e) {
+
 		std::cout << "Status: 404 Not Found\r\n\n";
 		std::cout << e.getMessage() << std::endl;
+
 	} catch (Cooper::Exceptions::InternalErrorException &e) {
+
         std::cout << "Status: 500 Internal Server Error\r\n\n";
         std::cout << e.getMessage() << std::endl;
-    }
 
+    }
 	return 0;
 };

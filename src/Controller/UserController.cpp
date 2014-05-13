@@ -41,12 +41,9 @@ public:
 	}
 
 	void registerAction() {
-		Http::ParameterBag p = Http::post();
-
-		std::cout << p.get("password");
 		UserRepository repo = UserRepository();
 
-		repo.create(p);
+		repo.create(Http::post());
 		//User *user = repo.create();
 
 	}

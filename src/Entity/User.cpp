@@ -5,13 +5,13 @@ class User {
 
 public:
 	User(std::string name, std::string password) {
-		this->id = "1";
+		this->id = "0";
 		this->name = name;
 		this->password = password;		
 	}
 
 	User() {
-		this->id = "1";
+		this->id = "0";
 	}
 
 	std::string getName() {
