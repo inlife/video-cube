@@ -1,4 +1,4 @@
-namespace VC {
+namespace Cooper {
 	
 	class Controller {
 	public:

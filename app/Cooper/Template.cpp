@@ -1,4 +1,4 @@
-namespace VC {
+namespace Cooper {
 
 	class Template {
 	private:
@@ -38,7 +38,7 @@ namespace VC {
 		}
 
 		Template(std::string name) {
-			this->add("baseurl", Utils::getBaseUrl());
+			this->add("baseurl", Http::getBaseUrl());
 			this->loadUrls();
 			this->open(name);
 		}

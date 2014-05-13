@@ -1,4 +1,4 @@
-class MainController : public VC::Controller {
+class MainController : public Cooper::Controller {
 private:
 	std::map <std::string, void(MainController::*)()> _methods;
 
@@ -9,7 +9,7 @@ public:
 			this->sendOKHeaders();
 			(*this.*_methods[name])();
 		} else {
-			throw VC::Exceptions::NotFoundException();
+			throw Cooper::Exceptions::NotFoundException();
 		}
 	}
 
@@ -18,7 +18,7 @@ public:
 	}
 
 	void indexAction() {
-		using namespace VC;
+		using namespace Cooper;
 
 		std::map<std::string, std::string> data;
 		// sample data
@@ -26,13 +26,13 @@ public:
 		data["title"] = "Lorem ipsum";
 		data["image"] = "img/temp/1.jpg";
 
-		Template tpl = Template("base");
+		Template tpl("base");
 
 		for(int i = 0; i < 3; i++) {
-			Template line = Template("_index-video-line");
+			Template line("_index-video-line");
 
 			for(int i = 0; i < 3; i++) {
-				Template box = Template("_index-video-box");
+				Template box("_index-video-box");
 
 				box.set("id", data["id"]);
 				box.set("title", data["title"]);

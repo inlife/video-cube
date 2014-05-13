@@ -1,11 +1,16 @@
-class UserRepository : public VC::EntityRepository {
+class UserRepository : public Cooper::EntityRepository {
 public:
-	User *load(VC::Utils::_params data) {
+	User load(Cooper::Http::ParameterBag data) {
 		// sample
-		return new User(data["login"], data["password"]);
+		return User(data["login"], data["password"]);
 	}
 
-	User *create(VC::Utils::_params data) {
-		return new User(data["login"], data["password"]);
+	User create(Cooper::Http::ParameterBag data) {
+		User user = User();
+
+		//if (data.find("login")) {
+		//	std::cout << "true!";
+		//}
+		return user;
 	}
 };

@@ -1,7 +1,0 @@
-namespace VC {
-	
-	class EntityRepository {
-
-	};
-	
-};

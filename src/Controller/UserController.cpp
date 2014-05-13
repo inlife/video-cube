@@ -1,4 +1,6 @@
-class UserController : public VC::Controller {
+using namespace Cooper;
+
+class UserController : public Controller {
 private:
 	std::map <std::string, void(UserController::*)()> _methods;
 
@@ -9,7 +11,7 @@ public:
 			this->sendOKHeaders();
 			(*this.*_methods[name])();
 		} else {
-			throw VC::Exceptions::NotFoundException();
+			throw Cooper::Exceptions::NotFoundException();
 		}
 	}
 
@@ -20,7 +22,6 @@ public:
 	}
 
 	void indexAction() {
-		using namespace VC;
 
 		Template tpl = Template("login");
 
@@ -30,32 +31,23 @@ public:
 	}
 
 	void loginAction() {
-		using namespace VC;
-
-		Utils::_params params = Utils::parseParams(
-			Utils::getPost()
-		);
 
 		UserRepository repo = UserRepository();
 
-		User *user = repo.load(params);
+		User user = repo.load(Http::post());
 
-		std::cout << "Your login: " << user->getName() << "<br>";
-		std::cout << "Your password: " << user->getPassword() << "<br>";
+		std::cout << "Your login: " << user.getName() << "<br>";
+		std::cout << "Your password: " << user.getPassword() << "<br>";
 	}
 
 	void registerAction() {
-		using namespace VC;
+		Http::ParameterBag p = Http::post();
 
-		Utils::_params params = Utils::parseParams(
-			Utils::getPost()
-		);
-
+		std::cout << p.get("password");
 		UserRepository repo = UserRepository();
 
-		User *user = repo.create(params);
+		repo.create(p);
+		//User *user = repo.create();
 
-		std::cout << "Your login: " << user->getName() << "<br>";
-		std::cout << "Your password: " << user->getPassword() << "<br>";
 	}
 };

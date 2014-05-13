@@ -10,11 +10,21 @@ public:
 		this->password = password;		
 	}
 
+	User() {
+		this->id = "1";
+	}
+
 	std::string getName() {
 		return this->name;
 	}
 
 	std::string getPassword() {
 		return this->password;
+	}
+
+	std::vector<Video> getUserVideos() {
+		VideoRepository vr = VideoRepository();
+
+		return vr.getByUserId(this->id);
 	}
 };
