@@ -6,11 +6,11 @@
 #include <fstream>
 #include <map>
 
-#include <pqxx/pqxx> 
-
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/replace.hpp>
+
+#include <pqxx/pqxx> 
 
 #include "Cooper/NotFoundException.cpp"
 #include "Cooper/InternalErrorException.cpp"
