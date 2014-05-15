@@ -1,12 +1,12 @@
 class User {
 	std::string id;
-	std::string name;
+	std::string login;
 	std::string password;
 
 public:
 	User(std::string name, std::string password) {
 		this->id = "0";
-		this->name = name;
+		this->login = login;
 		this->password = password;		
 	}
 
@@ -14,12 +14,28 @@ public:
 		this->id = "0";
 	}
 
-	std::string getName() {
-		return this->name;
+	std::string getId() {
+		return this->id;
+	}
+
+	void setId(std::string id) {
+		this->id = id;
+	}
+
+	std::string getLogin() {
+		return this->login;
+	}
+
+	void setLogin(std::string login) {
+		this->login = login;
 	}
 
 	std::string getPassword() {
 		return this->password;
+	}
+
+	void setPassword(std::string password) {
+		this->password = password;
 	}
 
 	std::vector<Video> getUserVideos() {

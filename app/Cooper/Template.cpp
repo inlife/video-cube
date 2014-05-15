@@ -29,12 +29,23 @@ namespace Cooper {
 			this->data[name].append(value);
 		}
 
-		std::string render() {
+		std::string render(bool header) {
+			std::string _header = "Content-type: text/html\r\n\r\n";
 			std::string _lcontent = this->content;
+
 			for(std::map<std::string, std::string>::iterator it = this->data.begin(); it != this->data.end(); ++it) {
 		        boost::algorithm::replace_all(_lcontent, "{{"+it->first+"}}", it->second);
 		    }
-		    return _lcontent;
+		    if (header) {
+		    	_header.append(_lcontent);
+		    	return _header;
+	    	} else {
+	    		return _lcontent;
+	    	}
+		}
+
+		std::string render() {
+			return this->render(true);
 		}
 
 		Template(std::string name) {

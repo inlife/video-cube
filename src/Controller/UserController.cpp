@@ -17,34 +17,47 @@ public:
 
 	UserController() {
 		this->_methods["index"] = &UserController::indexAction;
+		this->_methods["cabinet"] = &UserController::cabinetAction;
 		this->_methods["login"] = &UserController::loginAction;
 		this->_methods["register"] = &UserController::registerAction;
 	}
 
 	void indexAction() {
+		UserService us = UserService();
+		if (us.isLogined()) this->redirect("user", "cabinet");
+		
 
-		Template tpl = Template("login");
+		Template tpl = Template("user/index");
+		tpl.set("message", "Hello guest, please log in or register!");
+	
+		std::cout << tpl.render();
+	}
 
-		//tpl.set("content", "");
+	void cabinetAction() {
+		UserService us = UserService();
+		if (!us.isLogined()) this->redirect("user", "index");
+		
+
+		Template tpl = Template("user/cabinet");
+		tpl.set("message", "Hello guest, please log in or register!");
 	
 		std::cout << tpl.render();
 	}
 
 	void loginAction() {
+		UserService us = UserService();
+		User user = us.login(Http::post());
 
-		UserRepository repo = UserRepository();
-
-		User user = repo.load(Http::post());
-
-		std::cout << "Your login: " << user.getName() << "<br>";
-		std::cout << "Your password: " << user.getPassword() << "<br>";
+		this->redirect("user", "cabinet");
 	}
 
 	void registerAction() {
-		UserRepository repo = UserRepository();
+		UserService us = UserService();
+		User user = us.create(Http::post());
 
-		repo.create(Http::post());
-		//User *user = repo.create();
+		Template tpl = Template("user/index");
+		tpl.set("message", "Thank you, " + user.getLogin() + ". Now you can log in.");
 
+		std::cout << tpl.render();
 	}
 };

@@ -3,8 +3,8 @@ namespace Cooper {
 	class EntityRepository {
 	protected:
 
-		std::vector< std::map<std::string, std::string> > query(int type, std::string sql) {
-			std::vector< std::map<std::string, std::string> > result;
+		std::vector<ParameterBag> query(int type, std::string sql) {
+			std::vector<ParameterBag> result;
 
 			pqxx::connection C(
 				" dbname="	 + Cooper::config["dbname"] +
@@ -31,10 +31,13 @@ namespace Cooper {
 					pqxx::result R( N.exec( sql ));
 
 					for (pqxx::result::const_iterator c = R.begin(); c != R.end(); ++c) {
-						std::map<std::string, std::string> row;
+						//std::map<std::string, std::string> row;
+						ParameterBag row;
 
 						for (pqxx::const_tuple_iterator i = c.begin(); i != c.end(); ++i) {
-							row[i.name()] = i.as<std::string>();
+							//row[i.name()] = i.as<std::string>();
+							//std::cout << i.name() << " --- " << i.as<std::string>() << std::endl;
+							row.add(i.name(),  i.as<std::string>());
 						}
 
 						result.push_back(row);

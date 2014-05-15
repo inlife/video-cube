@@ -4,11 +4,17 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <map>
+#include <map>      
+#include <cctype>
+#include <iomanip>
+#include <sstream>
+#include <string>
+
 
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/replace.hpp>
+//#include <boost/filesystem.hpp>
 
 #include <pqxx/pqxx> 
 
@@ -25,10 +31,13 @@
 #include "../src/Entity/VideoRepository.cpp"
 #include "../src/Entity/User.cpp"
 #include "../src/Entity/UserRepository.cpp"
+#include "../src/Service/UserService.cpp"
 #include "../src/Controller/MainController.cpp"
 #include "../src/Controller/UserController.cpp"
 #include "../src/Resources/config/routing.cpp"
 #include "../src/Resources/config/parameters.cpp"
+
+//#include "../src/Encoder.h"
 
 //char *value = std::getenv( ENV[ i ].c_str() );  
 const std::string ENV[ 24 ] = {                 
@@ -43,11 +52,11 @@ const std::string ENV[ 24 ] = {
     "SERVER_SIGNATURE","SERVER_SOFTWARE" };
 
 int main() {
-    
+
     loadParams();
     
     Cooper::Http::_router router = loadRouting();
-	Cooper::Http::ParameterBag params = Cooper::Http::get();
+	Cooper::ParameterBag params = Cooper::Http::get();
 
 	try {
 		if (router.find(params["name"]) != router.end()) {
@@ -56,8 +65,10 @@ int main() {
 			throw Cooper::Exceptions::NotFoundException();
 		}
 	} catch (Cooper::Exceptions::FormException &e) {
+        Template tpl = Template("error/index");
 
-        std::cout << e.getMessage() << std::endl;
+        tpl.set("message", e.getMessage());
+        std::cout << tpl.render();
 
     } catch (Cooper::Exceptions::NotFoundException &e) {
 
@@ -69,6 +80,9 @@ int main() {
         std::cout << "Status: 500 Internal Server Error\r\n\n";
         std::cout << e.getMessage() << std::endl;
 
+    } catch (std::exception &e) {
+        std::cout << "Content-type: text/html\r\n\r\n";
+        std::cout << e.what();
     }
 	return 0;
 };
