@@ -30,6 +30,29 @@ namespace Cooper {
 		        }
 		    }
 		    return (ret);
+		}		
+
+		std::string urlEncode(const std::string &value) {
+			using namespace std;
+
+		    ostringstream escaped;
+		    escaped.fill('0');
+		    escaped << hex;
+
+		    for (string::const_iterator i = value.begin(), n = value.end(); i != n; ++i) {
+		        string::value_type c = (*i);
+		        if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+		            escaped << c;
+		        }
+		        else if (c == ' ')  {
+		            escaped << '+';
+		        }
+		        else {
+		            escaped << '%' << setw(2) << ((int) c) << setw(0);
+		        }
+		    }
+
+		    return escaped.str();
 		}
 
 		ParameterBag parseParams(std::string query) {
@@ -60,6 +83,10 @@ namespace Cooper {
 			} else {
 				return ParameterBag();
 			}
+		}
+
+		void setCookie(std::string name, std::string value) {
+			std::cout << "Set-Cookie:" + name + "=" + urlEncode(value) + ";\r\n";
 		}
 
 		ParameterBag get() {

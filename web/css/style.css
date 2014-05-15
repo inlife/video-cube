@@ -11,7 +11,7 @@ body {
 					Tahoma,
 					sans-serif;
 	font-size: 13px;
-	background: url("../img/bg.jpg") fixed center center;
+	background: url("../img/bg.jpg") no-repeat center center;
 	background-size: cover;
 	-o-background-size: cover;
 	-moz-background-size: cover;
@@ -163,4 +163,170 @@ article .block:last-child {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+
+.video {
+	margin-top: 30px;
+}
+
+.video .line {
+	overflow: hidden;
+}
+
+.video .block {
+	max-width: 640px;
+	min-height: 390px;
+	float: left;
+	width: auto;
+	margin: 0px !important;
+	display: block;
+}
+
+.video .block .artwork {
+	height: 360px !important;
+}
+
+.video .block .artwork iframe {
+	background: #ccc;
+	width: 640px;
+	height: 360px;
+	display: block;
+	float: left;
+}
+
+.video .sidebar {
+	display: block;
+	float: right;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 280px !important;
+	padding: 30px 15px 0px 15px;
+}
+
+.video h3 {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-bottom: 15px;
+}
+
+.sidebar ul {
+	list-style-type: none;
+}
+
+.sidebar ul li {
+	display: block;
+	float: left;
+	width: 100%;
+	padding: 15px 0px;
+	border-bottom: 1px solid #ddd;
+}
+
+.sidebar ul li:last-child {
+	border-bottom: 0px;
+	padding: 15px 0px 15px 0px !important;
+}
+
+.sidebar img {
+	width: 96px;
+	height: 54px;
+	background: #ccc;
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+
+.add {
+	display: block;
+	margin: 30px auto 0px auto;
+	width: 360px;
+}
+
+.add input[type="text"] {
+	background: #fff;
+	border-bottom: 2px solid #404d53;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	width: 360px;
+	display: block;
+	font-size: 16px;
+}
+
+.add input[type="text"]:focus {
+	border-bottom: 2px solid #fff000;
+}
+
+.add input[type="file"] {
+	display: block;
+	float: left;
+	width: 360px;
+	height: 360px;
+	border: 2px solid #404d53;
+	cursor: pointer;
+}
+
+
+.upload { 
+	border: 6px dashed #ddd;
+	margin: 30px 0px 0px 0px;
+	width: 348px;
+	height: 348px;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	background: url("../img/icon_plus.svg") no-repeat center center;
+	cursor: pointer;
+}
+
+
+.upload input[type="file"] {
+	border: 0px;
+	opacity: 0;
+}
+
+input[type="submit"] {
+	display: inline-block;
+	width: 360px;
+	padding: 10px 10px;
+	background: #fff000;
+	margin-top: 30px;
+	border-radius: 4px;
+	color: #404d53;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.user h3 {
+	text-align: center;
+}
+
+.userpic {
+	width: 200px;
+	height: 200px;
+	display: block;
+	border-radius: 100px;
+	margin: 0px auto 30px auto;
+}
+
+.userpic img {
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+}
+
+.like {
+	display: block;
+	width: 640px;
+	text-align: center;
+	float: left;
+	padding: 15px 0px;
+}
+
+.like a {
+	display: inline-block;
+	margin-top: 0px;
 }

@@ -1,6 +1,3 @@
-#include <boost/filesystem.hpp>
-#include"./Encoder.h"
-
 class VideoRepository : public Cooper::EntityRepository {
 public: 
 	std::vector<Video> getByUserId(std::string id) {
@@ -8,10 +5,10 @@ public:
 
 		return videos;
 	}
-
-	Video create(std::string userId, std::string name/*Fill with some input data*/){
-		Video video = Video(createVideoFolder(userId, name), name, userId);
-		
+	/*
+	Video create(std::string userId, std::string name){
+		//Video video = Video(createVideoFolder(userId, name), name, userId);
+		return Video();	
 	}
 
 	std::string createVideoFolder(std::string usetId){
@@ -23,5 +20,6 @@ public:
 		const char _dirPath[] = folder.c_str();
 		boost::filesystem::path dir(_dirPath);
 		return folder;
-	}
+		return std::string();
+	}*/
 };

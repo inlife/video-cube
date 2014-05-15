@@ -76,7 +76,7 @@ p {
 	background-color: #88a5c2;
 }
 
-input[type=text] {
+input[type=email] {
 	background: url(http://imageshack.com/a/img812/1096/y67f.png) no-repeat 10px center;
 }
 
@@ -86,7 +86,7 @@ input[type=password] {
 	background: url(http://imageshack.com/a/img812/6980/lcnq.png) no-repeat 10px center;
 }
 
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
 	display: block;
 	width: 190px;
 	height: 40px;
@@ -104,7 +104,7 @@ input[type=text], input[type=password] {
 	        transition: background-color .2s ease;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=email]:focus, input[type=password]:focus {
 	outline: none;
 	border-color: #fee23e;
 }
@@ -157,4 +157,16 @@ img	{
 
 .register-block {
 	float: right;
+}
+
+#wrapper h1 {
+	font-size: 30px;
+	color: #fff;
+	text-align: center;
+}
+
+#wrapper button {
+	font-size: 18px;
+	text-transform: uppercase;
+	margin-top: 100px;
 }

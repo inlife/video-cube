@@ -1,36 +1,56 @@
 class UserRepository : public Cooper::EntityRepository {
 public:
-	User load(Cooper::Http::ParameterBag data) {
-		// sample
-		return User(data["login"], data["password"]);
+
+	bool exists(std::string login, std::string password) {
+		std::string sql = "SELECT COUNT(*) FROM \"user\" WHERE login='";
+			sql.append( login );
+
+			if (password.size() > 0) {
+				sql.append( "' AND password='" );
+				sql.append( password );
+				sql.append( "'" );
+			} else {
+				sql.append( "'" );
+			}
+
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		int usrcnt = std::atoi(result[0].get("count").c_str());
+		return (usrcnt > 0);
 	}
 
-	User create(Cooper::Http::ParameterBag data) {
+	bool exists(std::string login) {
+		return this->exists(login, std::string(""));
+	}
+
+	User load(std::string login, std::string password) {
+
+		std::string sql = "SELECT * FROM \"user\" WHERE login='";
+			sql.append( login );
+			sql.append( "' AND password='" );
+			sql.append( password );
+			sql.append( "'" );
+		
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		
 		User user = User();
 
-		if (data.exists("login") && data.exists("password") && data.exists("repassword")) {
-			
-			if (data.get("password") != data.get("repassword")) {
-				throw Cooper::Exceptions::FormException("Passwords are not equal.");
-			}
-			
-			// no hashing
-			std::string sql1 = "INSERT INTO \"user\" (id, login, password) VALUES (2, '";
-				sql1.append( data.get("login") );
-				sql1.append( "', '" );
-				sql1.append( data.get("password") );
-				sql1.append( "')" );
+		user.setId(result[0]["id"]);
+		user.setLogin(result[0]["login"]);
+		user.setPassword(result[0]["password"]);
 
-				std::cout <<sql1;
+		return user;
+	}
 
-			this->query(1, sql1);
+	User create(std::string login, std::string password) {
+		
+		std::string sql = "INSERT INTO \"user\" (login, password) VALUES ('";
+			sql.append( login );
+			sql.append( "', '" );
+			sql.append( password );
+			sql.append( "')" );
 
-			//std::string sql2 = "select * from users where (login)"
+			this->query(1, sql);
 
-			return user;
-
-		} else {
-			throw Cooper::Exceptions::FormException("Please, fill in all fields.");
-		}
+		return this->load(login, password);
 	}
 };
