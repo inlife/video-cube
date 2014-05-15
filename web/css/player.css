@@ -1,0 +1,23 @@
+#player_videos {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.play-controls {
+  float: left;
+  display: inline-block;
+  width: 20%;
+}
+.player-controls {
+  width: 50%;
+}
+.rewind-controls {
+  float: right;
+  display: inline-block;
+  width: 80%;
+}
+
+.player-controls.rewind {
+  width: 100%;
+}
