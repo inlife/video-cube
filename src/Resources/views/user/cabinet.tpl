@@ -8,11 +8,11 @@
 		<header>
 			<div class="wrapper">
 				<div class="logo"></div>
-				<a href="#">
+				<a href="{{baseurl}}">
 					<h1>VideoCube</h1>
 					<span>Your videos are here. Redefined.</span>
 				</a>
-				<a href="#" class="button">Enter</a>
+				<a href="#" class="button">Cabinet</a>
 			</div>
 		</header>
 		<nav>
@@ -28,7 +28,7 @@
 				<article class="video add user">
 					<div class="line">
 						<img src="img/userpic.jpg" class="userpic" />
-						<h3>Welcome, $USERNAME$</h3>
+						<h3>Welcome, {{userlogin}}</h3>
 						<form method="post">
 							<input type="submit" value="Add video" />
 						</form>

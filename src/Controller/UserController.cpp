@@ -40,6 +40,7 @@ public:
 
 		Template tpl = Template("user/cabinet");
 		tpl.set("message", "Hello guest, please log in or register!");
+		tpl.set("userlogin", us.load().getLogin());
 	
 		std::cout << tpl.render();
 	}
