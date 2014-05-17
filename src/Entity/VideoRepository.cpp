@@ -67,4 +67,24 @@ public:
 
 			this->query(1, sql);
 	}
+
+	void like(std::string videoid, std::string userid) {
+		std::string sql = "INSERT INTO \"like\" (userid, videoid) VALUES ('";
+			sql.append( userid );
+			sql.append( "', '" );
+			sql.append( videoid );
+			sql.append( "')" );
+
+		this->query(1, sql);
+	}
+
+	void view(std::string videoid, std::string userid) {
+		std::string sql = "INSERT INTO \"view\" (userid, videoid) VALUES ('";
+			sql.append( userid );
+			sql.append( "', '" );
+			sql.append( videoid );
+			sql.append( "')" );
+
+		this->query(1, sql);
+	}
 };

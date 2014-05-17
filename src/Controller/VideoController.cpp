@@ -20,6 +20,7 @@ public:
 		this->_methods["add"] = &VideoController::addAction;
 		this->_methods["likes"] = &VideoController::likesAction;
 		this->_methods["recommend"] = &VideoController::recommendAction;
+		this->_methods["like"] = &VideoController::ajaxLikeAction;
 	}
 
 	void indexAction() {
@@ -45,6 +46,14 @@ public:
 		
 		VideoService vs = VideoService();
 		vs.upload(us.getUser());
+	}
+
+	void ajaxLikeAction() {
+		UserService us;
+		if (!us.isLogined()) return throw Exceptions::FormException("User not logined");
+
+		VideoService vs;
+		vs.like();
 	}
 
 	void addAction() {
@@ -82,10 +91,6 @@ public:
 		}
 
 		std::cout << tpl.render();
-	}
-
-	void likeAction() {
-
 	}
 
 	void recommendAction() {

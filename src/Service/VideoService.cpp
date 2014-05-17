@@ -53,7 +53,8 @@ public:
 			vr.updateChunks(video);
 
 			// TODO: remove video from tmp
-			
+			this->removeTmp("uploads/tmp/" + file->getFilename());
+
 			std::cout << "Content-type: text/html\r\n\r\n";
 			std::cout << video.getId();
 
@@ -62,9 +63,41 @@ public:
 		}
 	}
 
+	void removeTmp(std::string name) {
+		Encoder::exec("rm " + name);
+	}
+
 	std::string generateFolders(std::string userid, std::string videoid) {
 		std::string path = "uploads/user/" + userid + "/video/" + videoid + "/";
 		Encoder::exec("mkdir -p " + path);
 		return path;
+	}
+
+	void like() {
+		Cooper::ParameterBag data = Cooper::Http::post();
+
+		if (data.exists("userid") && data.exists("videoid")) {
+
+			VideoRepository vr;
+
+			vr.like(
+				data.get("videoid"),
+				data.get("userid")
+			);
+
+		} else {
+			throw Cooper::Exceptions::FormException("Wrong request.");
+		}
+	}
+
+	void view() {
+		Cooper::ParameterBag data = Cooper::Http::post();
+
+		VideoRepository vr;
+
+		vr.like(
+			data.get("videoid"),
+			data.get("userid")
+		);
 	}
 };
