@@ -77,7 +77,7 @@ Player.prototype.update = function() {
       this.counter++;
       this.newVideoId = this.globalId+this.counter;
 
-      this.createVideo(this.newVideoId);
+      setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
 
       this.partCounter++;
 
@@ -92,7 +92,7 @@ Player.prototype.update = function() {
       this.counter++;
       this.newVideoId = this.globalId+this.counter;
 
-      this.createVideo(this.newVideoId);
+      setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
     }
   }
 
