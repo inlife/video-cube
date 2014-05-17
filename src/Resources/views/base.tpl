@@ -13,7 +13,7 @@
 					<h1>VideoCube</h1>
 					<span>Your videos are here. Redefined.</span>
 				</a>
-				<a href="{{baseurl}}?name=user&action=index" class="button">Cabinet</a>
+				<a href="{{baseurl}}?name=user&action=index" class="button">CABINET</a>
 			</div>
 		</header>
 		<nav>
@@ -38,7 +38,7 @@
 			
 		    (function() {
 				if ($("#vc-player").length > 0) {
-					var player = new Player("vc-player", "{{videourl}}", {{chunks}});
+					var player = new Player("vc-player", "{{videourl}}", "{{chunks}}");
 					player.startVideo();
 				}
 			})();

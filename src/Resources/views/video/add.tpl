@@ -1,6 +1,6 @@
 <article class="video add">
 	<div class="line">
-		<h3>Добавление видео</h3>
+		<h3>Upload your video</h3>
 		<form id="fileinfo" enctype="multipart/form-data" method="post" name="fileinfo">
 			<input type="text" id="title" name="title" placeholder="Add title" />
 			<div class="preview">
