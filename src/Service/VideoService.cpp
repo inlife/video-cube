@@ -76,30 +76,24 @@ public:
 	void like(std::string userid) {
 		Cooper::ParameterBag data = Cooper::Http::get();
 
-			std::cout << "Content-type: text/html\r\n\r\n";
-			std::cout << data.exists("videoid");
 		if (userid.size() > 0 && data.exists("videoid")) {
 
 			VideoRepository vr;
-
 			vr.like(data.get("videoid"), userid);
-
+			std::cout << "Content-type: text/html\r\n\r\n";
 
 		} else {
 			throw Cooper::Exceptions::FormException("Wrong request.");
 		}
 	}
 
-	void view() {
-		Cooper::ParameterBag data = Cooper::Http::post();
+	void view(std::string userid) {
+		Cooper::ParameterBag data = Cooper::Http::get();
 
 		VideoRepository vr;
-
-		vr.like(
-			data.get("videoid"),
-			data.get("userid")
-		);
+		vr.like(data.get("videoid"), userid);
 		std::cout << "Content-type: text/html\r\n\r\n";
+
 	}
 
 	std::vector<Video> getUserVideos(std::string userid) {
@@ -120,5 +114,15 @@ public:
 	std::vector<Video> getAllVideos() {
 		VideoRepository vr;
 		return vr.getAllVideos();
+	}
+
+	std::string getViews(Video video) {
+		VideoRepository vr;
+		return vr.getViews(video.getId());
+	}
+
+	std::string getLikes(Video video) {
+		VideoRepository vr;
+		return vr.getLikes(video.getId());
 	}
 };

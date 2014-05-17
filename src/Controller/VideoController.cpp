@@ -37,8 +37,8 @@ public:
 		btpl.set("videoid", video.getId());
 		btpl.set("videourl", video.getUrl());
 		btpl.set("chunks", video.getChunks());
-		btpl.set("views", "0");
-		btpl.set("likes", "0");
+		btpl.set("views", vs.getViews(video));
+		btpl.set("likes", vs.getLikes(video));
 
 		std::cout << btpl.render();
 	}
@@ -57,6 +57,17 @@ public:
 
 		VideoService vs;
 		vs.like(us.getUser().getId());
+	}
+
+	void ajaxViewAction() {
+		UserService us;
+		VideoService vs;
+
+		if (us.isLogined()) {
+			vs.view(us.getUser().getId());
+		} else {
+			vs.view("");
+		}
 	}
 
 	void addAction() {

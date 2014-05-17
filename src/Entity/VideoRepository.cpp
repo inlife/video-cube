@@ -69,9 +69,13 @@ public:
 	}
 
 	void like(std::string videoid, std::string userid) {
-		std::string sql = "INSERT INTO \"like\" (userid, videoid) VALUES ('";
+		std::string sql = "INSERT INTO \"like\" (userid, videoid) SELECT '";
 			sql.append( userid );
 			sql.append( "', '" );
+			sql.append( videoid );
+			sql.append( "' WHERE NOT EXISTS ( SELECT id FROM \"like\" WHERE userid = '" );
+			sql.append( userid );
+			sql.append( "' AND videoid = '" );
 			sql.append( videoid );
 			sql.append( "')" );
 
@@ -140,5 +144,23 @@ public:
 		return this->toObjects(
 			this->query(2, sql)
 		);
+	}
+	
+	std::string getViews(std::string videoid) {
+		std::string sql = "SELECT COUNT(*) FROM \"view\" WHERE videoid = '";
+			sql.append( videoid );
+			sql.append( "'" );
+
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		return result[0].get("count");
+	}
+	
+	std::string getLikes(std::string videoid) {
+		std::string sql = "SELECT COUNT(*) FROM \"like\" WHERE videoid = '";
+			sql.append( videoid );
+			sql.append( "'" );
+
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		return result[0].get("count");
 	}
 };

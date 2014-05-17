@@ -43,6 +43,7 @@
 					player.startVideo();
 
 					//like
+					var liked = false;
 					$("#like").click(function(e) {
 						e.preventDefault();
 
@@ -50,7 +51,12 @@
 				            url: '{{baseurl}}?name=video&action=like&type=ajax&videoid={{videoid}}',  
 				            type: 'POST',
 				            success: function(data) {
-				            	console.log(data);
+				            	if (!liked) {
+				            		liked = true;
+				            		$('#likes').html(
+				            			1 + parseInt($('#likes').html())
+			            			);
+				            	}
 				            }, 
 						    error: function(data) {
 						    	alert(data.responseText);
