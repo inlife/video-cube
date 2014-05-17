@@ -8,11 +8,11 @@
 //     - parts {Number} count of 10sec parts
 
 // Examples:
-//     var player = new Player('video', '/users/1/video/2/', 40);
+//     var player = new Player('video', '/users/1/video/2/', 40, watch_function);
 //     player.startVideo();
 
 
-function Player(elementId , video_path, duration){
+function Player(elementId , video_path, duration, watch){
   this.videoPath  = video_path;
   this.highPath   = this.videoPath+'/720/';
   this.mediumPath = this.videoPath+'/360/';
@@ -23,11 +23,13 @@ function Player(elementId , video_path, duration){
   this.partCounter = 0;
   this.playable = true;
   this.inner = '';
-  this.parts = duration;
+  this.parts = parseInt(duration);
   this.quality = 1;
   this.lock = true;
   this.newTime = false;
   this.fullscreen = false;
+  this.watch = watch;
+  this.watched = false;
 
   this.createDom();
 }
@@ -60,6 +62,13 @@ Player.prototype.showVideo = function(itemId){
 }
 Player.prototype.update = function() {
   console.log({lock: this.lock, part: this.counter, playable: this.playable, counter: this.partCounter, quality: this.quality, fullscreen: this.fullscreen});
+
+  if(this.counter > (this.parts/2)){
+    if(!this.watched){
+      this.watch();
+      this.watched = true;
+    }
+  }
   if(!this.lock) {
     this.partCounter--;
   }
@@ -145,7 +154,7 @@ Player.prototype.goTo = function(value){
   this.partCounter = 0;
   this.hideVideo(this.globalId + (this.counter - 1));
   this.newTime = true;
-  this.counter = value;
+  this.counter = parseInt(value);
 }
 
 Player.prototype.createDom = function(){
