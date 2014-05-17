@@ -8,17 +8,36 @@
   position: absolute;
   float: left;
   display: inline-block;
-  width: 20%;
+  width: 30%;
 }
 .player-controls {
-  width: 50%;
+  width: 30%;
+  padding: 3px;
+  margin: 1px;
+  border-radius: 3px;
+  border: none;
+  background-color: #B9B9B9;
 }
 .rewind-controls {
   float: right;
   display: inline-block;
-  width: 80%;
+  width: 70%;
 }
 
 .player-controls.rewind {
   width: 100%;
+  background-color: #888;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: #fff;
+    height:20px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+    background-color: #444;
+    width: 10px;
+    height: 20px;
 }
