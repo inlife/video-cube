@@ -51,10 +51,15 @@
 
 				function startUploading() {
 					uploading = true;
+					var fileName;
+					document.getElementById('fileinfo').onchange = 
+					function(){
+						fileName = this.value;
+   					};
 					timerid = setInterval(function() {
-						if (iter === 0) {$('input[type=submit]').val("."); iter = 1}
-						else if (iter === 1) {$('input[type=submit]').val(".."); iter = 2}
-						else if (iter === 2) {$('input[type=submit]').val("..."); iter = 0}
+						if (iter === 0) {$('input[type=submit]').val(fileName+"."); iter = 1}
+						else if (iter === 1) {$('input[type=submit]').val(fileName+".."); iter = 2}
+						else if (iter === 2) {$('input[type=submit]').val(fileName+"..."); iter = 0}
 					}, 500);
 				}
 
