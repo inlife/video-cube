@@ -46,7 +46,11 @@ public:
 		this->chunks = chunks;
 	}
 
+	std::string getUrl() {
+		return "uploads/user/" + this->getUserId() + "/video/" + this->getId() + "/";
+	}
+
 	std::string getPreview() {
-		return "uploads/user/" + this->getUserId() + "/video/" + this->getId() + "/preview.jpeg";
+		return this->getUrl() + "/preview.jpeg";
 	}
 };

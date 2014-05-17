@@ -25,7 +25,7 @@ public:
 		data["title"] = "Lorem ipsum";
 		data["image"] = "img/temp/1.jpg";
 
-		Template tpl("main/index");
+		Template tpl("base");
 
 		for(int i = 0; i < 3; i++) {
 			Template line("main/_index-video-line");

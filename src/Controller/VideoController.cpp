@@ -15,12 +15,32 @@ public:
 	}
 
 	VideoController() {
+		this->_methods["index"] = &VideoController::indexAction;
 		this->_methods["upload"] = &VideoController::ajaxUplaodAction;
 		this->_methods["add"] = &VideoController::addAction;
+		this->_methods["likes"] = &VideoController::likesAction;
+		this->_methods["recommend"] = &VideoController::recommendAction;
+	}
+
+	void indexAction() {
+		Template btpl("base");
+		Template tpl("video/player");
+
+		VideoService vs;
+		Video video = vs.getPlayerVideo();
+
+		tpl.set("title", video.getTitle());
+
+		btpl.set("content", tpl.render(false));
+
+		btpl.set("videourl", video.getUrl());
+		btpl.set("chunks", video.getChunks());
+
+		std::cout << btpl.render();
 	}
 
 	void ajaxUplaodAction() {
-		UserService us = UserService();
+		UserService us;
 		if (!us.isLogined()) this->redirect("user", "login");
 		
 		VideoService vs = VideoService();
@@ -28,22 +48,22 @@ public:
 	}
 
 	void addAction() {
+		Template btpl("base");
 		Template tpl("video/add");
-		std::cout << tpl.render();
+
+		btpl.set("content", tpl.render(false));
+
+		std::cout << btpl.render();
 	}
 
-	void indexAction(){
-
-	}
-
-	void likesAction(){
+	void likesAction() {
 		std::map<std::string, std::string> data;
 		// sample data
 		data["id"] = "50";
 		data["title"] = "Lorem ipsum";
 		data["image"] = "img/temp/1.jpg";
 
-		Template tpl("video/likes");
+		Template tpl("base");
 
 		for (int i = 0; i < 3; i++) {
 			Template line("main/_index-video-line");
@@ -64,18 +84,18 @@ public:
 		std::cout << tpl.render();
 	}
 
-	void likeAction(){
+	void likeAction() {
 
 	}
 
-	void recommendAction(){
+	void recommendAction() {
 		std::map<std::string, std::string> data;
 		// sample data
 		data["id"] = "50";
 		data["title"] = "Lorem ipsum";
 		data["image"] = "img/temp/1.jpg";
 
-		Template tpl("video/recomend");
+		Template tpl("base");
 
 		for (int i = 0; i < 3; i++) {
 			Template line("main/_index-video-line");

@@ -1,6 +1,20 @@
 class VideoService {
 public:
 
+	Video getPlayerVideo() {
+		Cooper::ParameterBag data = Cooper::Http::get();
+		
+		VideoRepository vr;
+		
+		if (data.exists("id") && vr.exists(data.get("id"))) {
+
+			return vr.load(data.get("id"));
+
+		} else {
+			throw Cooper::Exceptions::FormException("Video doesn't exist");
+		}
+	}
+
 	void upload(User user) {
 		cgicc::Cgicc cgi;
 

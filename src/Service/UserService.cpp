@@ -6,7 +6,6 @@ public:
 		UserRepository repository = UserRepository();
 
 		if (data.exists("login") && data.exists("password")) {
-
 			return repository.exists(data.get("login"), data.get("password"));
 		}
 		
@@ -23,6 +22,11 @@ public:
 		);
 
 		return user;
+	}
+
+	void logout() {
+		Cooper::Http::setCookie("login", "");
+		Cooper::Http::setCookie("password", "");
 	}
 
 	User getUser() {

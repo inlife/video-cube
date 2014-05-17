@@ -1,108 +1,75 @@
-<!DOCTYPE html>
-<html>
-	<head lang="en">
-		<meta charset="utf-8" />
-		<link href="css/style.css" rel="stylesheet" />
-	</head>
-	<body>
-		<header>
-			<div class="wrapper">
-				<div class="logo"></div>
-				<a href="{{baseurl}}">
-					<h1>VideoCube</h1>
-					<span>Your videos are here. Redefined.</span>
-				</a>
-				<a href="#" class="button">Cabinet</a>
-			</div>
-		</header>
-		<nav>
-			<div class="wrapper">
-				<a href="{{baseurl}}">All videos</a>
-				<a href="{{baseurl}}?name=videos&action=likes">Likes</a>
-				<a href="{{baseurl}}?name=videos&action=recommend">Recommendations</a>
-				<a href="{{baseurl}}?name=user">Profile</a>
-			</div>
-		</nav>
-		<main>
-			<div class="wrapper">
-				<article class="video add user">
-					<div class="line">
-						<img src="img/userpic.jpg" class="userpic" />
-						<h3>Welcome, {{userlogin}}</h3>
-						<a href="{{baseurl}}?name=video&action=add"><input type="submit" value="Add video"></a>
-					</div>
-				</article>
-				<article>
-					<div class="line">
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">Lorem ipsum</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">dolor sit amet</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">contestatur simplicit elit</a></span>
-						</div>
-					</div>
-					<div class="line">
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">Lorem ipsum</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">dolor sit amet</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">contestatur simplicit elit</a></span>
-						</div>
-					</div>
-					<div class="line">
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">Lorem ipsum</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">dolor sit amet</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">contestatur simplicit elit</a></span>
-						</div>
-					</div>
-				</article>
+<article class="video add user">
+	<div class="line">
+		<img src="img/userpic.jpg" class="userpic" />
+		<h3>Welcome, {{userlogin}}</h3>
+		<a href="{{baseurl}}?name=video&action=add"><input type="submit" value="Add video"></a>
+		<a href="{{baseurl}}?name=user&action=logout"><input type="submit" value="Exit"></a>
+	</div>
+</article>
+<article>
+	<div class="line">
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">Lorem ipsum</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">dolor sit amet</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">contestatur simplicit elit</a></span>
+		</div>
+	</div>
+	<div class="line">
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">Lorem ipsum</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">dolor sit amet</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">contestatur simplicit elit</a></span>
+		</div>
+	</div>
+	<div class="line">
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">Lorem ipsum</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">dolor sit amet</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">contestatur simplicit elit</a></span>
+		</div>
+	</div>
+</article>
 
-				<article class="video add user">
-					<div class="line">
-						<h3>Рекомендованные видео</h3>
-					</div>
-				</article>
+<article class="video add user">
+	<div class="line">
+		<h3>Рекомендованные видео</h3>
+	</div>
+</article>
 
-				<article>
-					<div class="line">
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">Lorem ipsum</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">dolor sit amet</a></span>
-						</div>
-						<div class="block">
-							<div class="artwork"><img src="img/temp/1.jpg" /></div>
-							<span><a href="#">contestatur simplicit elit</a></span>
-						</div>
-					</div>
-				</article>
-			</div>
-		</main>
-	<script src="js/jquery.js"></script>
-	<script src="js/opt.js"></script>
-	<script src="js/upload_demo.js"></script>
-	</body>
-</html>
+<article>
+	<div class="line">
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">Lorem ipsum</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">dolor sit amet</a></span>
+		</div>
+		<div class="block">
+			<div class="artwork"><img src="img/temp/1.jpg" /></div>
+			<span><a href="#">contestatur simplicit elit</a></span>
+		</div>
+	</div>
+</article>

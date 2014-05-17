@@ -18,42 +18,54 @@ public:
 		this->_methods["index"] = &UserController::indexAction;
 		this->_methods["cabinet"] = &UserController::cabinetAction;
 		this->_methods["login"] = &UserController::loginAction;
+		this->_methods["logout"] = &UserController::logoutAction;
 		this->_methods["register"] = &UserController::registerAction;
 	}
 
 	void indexAction() {
 		UserService us = UserService();
-		if (us.isLogined()) this->redirect("user", "cabinet");
+		if (us.isLogined()) return this->redirect("user", "cabinet");
 
-		Template tpl = Template("user/index");
+		Template tpl("user/login-register-form");
 		tpl.set("message", "Hello guest, please log in or register!");
 	
 		std::cout << tpl.render();
 	}
 
 	void cabinetAction() {
-		UserService us = UserService();
-		if (!us.isLogined()) this->redirect("user", "index");
-		
-		Template tpl = Template("user/cabinet");
+		UserService us;
+		if (!us.isLogined()) return this->redirect("user", "index");
+
+		Template btpl("base");
+		Template tpl("user/cabinet");
+
 		tpl.set("message", "Hello guest, please log in or register!");
 		tpl.set("userlogin", us.load().getLogin());
+
+		btpl.set("content", tpl.render(false));
 	
-		std::cout << tpl.render();
+		std::cout << btpl.render();
 	}
 
 	void loginAction() {
-		UserService us = UserService();
+		UserService us;
 		User user = us.login(Http::post());
 
-		this->redirect("user", "cabinet");
+		return this->redirect("user", "cabinet");
+	}
+
+	void logoutAction() {
+		UserService us;
+
+		us.logout();
+		return this->redirect("main", "index");
 	}
 
 	void registerAction() {
-		UserService us = UserService();
+		UserService us;
 		User user = us.create(Http::post());
 
-		Template tpl = Template("user/index");
+		Template tpl("user/login-register-form");
 		tpl.set("message", "Thank you, " + user.getLogin() + ". Now you can log in.");
 
 		std::cout << tpl.render();

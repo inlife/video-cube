@@ -1,5 +1,14 @@
 class VideoRepository : public Cooper::EntityRepository {
 public: 
+
+	bool exists(std::string id) {
+		std::string sql = "SELECT COUNT(*) FROM \"video\" WHERE id=";
+			sql.append( id );
+
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		int usrcnt = std::atoi(result[0].get("count").c_str());
+		return (usrcnt > 0);
+	}
 	
 	Video create(std::string userid, std::string title) {
 
@@ -12,6 +21,23 @@ public:
 			this->query(1, sql);
 
 		return this->load(userid, title);
+	}
+
+	Video load(std::string id) {
+
+		std::string sql = "SELECT * FROM \"video\" WHERE id=";
+			sql.append( id );
+		
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		
+		Video video = Video();
+
+		video.setId(result[0]["id"]);
+		video.setTitle(result[0]["title"]);
+		video.setUserId(result[0]["userid"]);
+		video.setChunks(result[0]["chunks"]);
+
+		return video;
 	}
 
 	Video load(std::string userid, std::string title) {
@@ -29,6 +55,7 @@ public:
 		video.setId(result[0]["id"]);
 		video.setTitle(result[0]["title"]);
 		video.setUserId(result[0]["userid"]);
+		video.setChunks(result[0]["chunks"]);
 
 		return video;
 	}
