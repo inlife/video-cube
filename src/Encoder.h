@@ -44,19 +44,19 @@ namespace Encoder {
 		exec(_c);	
 
 		for (int i = 0; i < chunks; i++) {
-			command = "../app/ffmpeg -ss " + to_string(i * _time) + " -t " + to_string(_time) +  " -i '" + path + "' -qscale 1 -s 320x240 -vcodec mpeg4 -acodec ac3 " + output + "240/" + to_string(i) + ".mp4";
+			command = "../app/ffmpeg -ss " + to_string(i * _time) + " -t " + to_string(_time) +  " -i '" + path + "' -qscale 1 -s 320x240 -ar 22050 -b 800k -f mp4 -strict -2 -c:a aac " + output + "240/" + to_string(i) + ".mp4";
 			_c = command.c_str();
 			exec(_c);
 		}
 
 		for (int i = 0; i < chunks; i++) {
-			command = "../app/ffmpeg -ss " + to_string(i * _time) + " -t " + to_string(_time) +  " -i '" + path + "' -qscale 1 -s 640x360 -vcodec mpeg4 -acodec ac3 " + output + "360/" + to_string(i) + ".mp4";
+			command = "../app/ffmpeg -ss " + to_string(i * _time) + " -t " + to_string(_time) +  " -i '" + path + "' -qscale 1 -s 640x360 -ar 22050 -b 800k -f mp4 -strict -2 -c:a aac " + output + "360/" + to_string(i) + ".mp4";
 			_c = command.c_str();
 			exec(_c);
 		}
 
 		for (int i = 0; i < chunks; i++) {
-			command = "../app/ffmpeg -ss " + to_string(i * _time) + " -t " + to_string(_time) +  " -i '" + path + "' -qscale 1 -s 1280x720 -vcodec mpeg4 -acodec ac3 " + output + "720/" + to_string(i) + ".mp4";
+			command = "../app/ffmpeg -ss " + to_string(i * _time) + " -t " + to_string(_time) +  " -i '" + path + "' -qscale 1 -s 1280x720 -ar 22050 -b 800k -f mp4 -strict -2 -c:a aac " + output + "720/" + to_string(i) + ".mp4";
 			_c = command.c_str();
 			exec(_c);
 		}
