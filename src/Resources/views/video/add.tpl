@@ -7,15 +7,6 @@
 				<div class="upload"><input type="file" name="file" required /></div>
 			</div>
 		</form>
-		<script type="text/javascript">
-				window.onload = function(){
-    				document.getElementById('form1').onchange = function(){
-        				document.getElementById('name').innerHTML = this.value;
-   					};
-				};
-			</script>
-
-		<div id="name"></div>
 		<input type="submit" value="Add video" />
 	</div>
 </article>
