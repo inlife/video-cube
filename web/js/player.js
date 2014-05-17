@@ -48,7 +48,7 @@ Player.prototype.createVideo = function(itemId){
   endTime = (new Date()).getTime();
   this.setPath(endTime-startTime);
 
-  player.playerItem.appendChild(item);
+  this.playerItem.appendChild(item);
 }
 
 Player.prototype.hideVideo = function(itemId){
@@ -96,7 +96,7 @@ Player.prototype.update = function() {
       this.counter++;
       this.newVideoId = this.globalId+this.counter;
 
-      this.createVideo(player.newVideoId);
+      this.createVideo(this.newVideoId);
     }
   }
 
@@ -109,22 +109,22 @@ Player.prototype.update = function() {
 }
 
 Player.prototype.pauseVideo = function(){
-  itemId = player.globalId+(player.counter-1);
+  itemId = this.globalId+(this.counter-1);
   item = document.getElementById(itemId);
   item.pause();
-  player.playable = false;
+  this.playable = false;
 }
 Player.prototype.playVideo = function(){
-  itemId = player.globalId+(player.counter-1);
+  itemId = this.globalId+(this.counter-1);
   item = document.getElementById(itemId);
   item.play();
-  player.playable = true;
+  this.playable = true;
 }
 
 Player.prototype.startVideo = function(){
   this.update();
-  var fuck = this; // hack for 'this' forwarding into update
-  setInterval(function(){fuck.update.call(fuck)}, 1000);
+  var self = this; // hack for 'this' forwarding into update
+  setInterval(function(){self.update.call(self)}, 1000);
 
 }
 
