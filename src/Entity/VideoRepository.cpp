@@ -34,9 +34,9 @@ public:
 	}
 
 	void updateChunks(Video video) {
-		std::string sql = "UPDATE \"video\" SET (chunks='";
+		std::string sql = "UPDATE \"video\" SET chunks='";
 			sql.append( video.getChunks() );
-			sql.append( "')" );
+			sql.append( "' WHERE id=" + video.getId() );
 
 			this->query(1, sql);
 	}

@@ -8,11 +8,11 @@
 		<header>
 			<div class="wrapper">
 				<div class="logo"></div>
-				<a href="#">
+				<a href="{{baseurl}}">
 					<h1>VideoCube</h1>
 					<span>Your videos are here. Redefined.</span>
 				</a>
-				<a href="#" class="button">Enter</a>
+				<a href="{{baseurl}}?name=user&action=cabinet" class="button">Cabinet</a>
 			</div>
 		</header>
 		<nav>
@@ -79,7 +79,8 @@
 		            type: 'POST',
 		            data: fd,
 		            success: function(data) {
-			    		window.location.replace("{{basurl}}?name=video&action=index&id=" + data);
+			    		stopUploading();
+			    		window.location.replace("{{baseurl}}?name=video&action=index&id=" + data);
                     }, 
 				    error: function(data) {
 			    		stopUploading();

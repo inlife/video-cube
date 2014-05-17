@@ -37,6 +37,8 @@ public:
 			// TODO: update video in database
 			video.setChunks(chunks);
 			vr.updateChunks(video);
+
+			// TODO: remove video from tmp
 			
 			std::cout << "Content-type: text/html\r\n\r\n";
 			std::cout << video.getId();
