@@ -17,10 +17,10 @@
 		</header>
 		<nav>
 			<div class="wrapper">
-				<a href="#">All videos</a>
-				<a href="#">Likes</a>
-				<a href="#">Recomendations</a>
-				<a href="#">Profile</a>
+				<a href="{{baseurl}}">All videos</a>
+				<a href="{{baseurl}}?name=videos&action=likes">Likes</a>
+				<a href="{{baseurl}}?name=videos&action=recommend">Recommendations</a>
+				<a href="{{baseurl}}?name=user">Profile</a>
 			</div>
 		</nav>
 		<main>
