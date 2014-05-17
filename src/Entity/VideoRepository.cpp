@@ -87,4 +87,58 @@ public:
 
 		this->query(1, sql);
 	}
+
+	std::vector<Video> toObjects(std::vector<Cooper::ParameterBag> videos) {
+		std::vector<Video> result;
+
+		for(std::size_t i = 0; i < videos.size(); i++) {
+			Video video;
+				video.setId(videos[i].get("id"));
+				video.setTitle(videos[i].get("title"));
+				video.setUserId(videos[i].get("userid"));
+				video.setChunks(videos[i].get("chunks"));
+			result.push_back(video);
+		}
+		return result;
+	}
+
+	std::vector<Video> getUserVideos(std::string userid) {
+		std::string sql = "SELECT * FROM \"video\" WHERE userid='";
+			sql.append( userid );
+			sql.append( "'" );
+		
+		return this->toObjects(
+			this->query(2, sql)
+		);
+	}
+
+	std::vector<Video> getLikedVideos(std::string userid) {
+		std::string sql = "SELECT * FROM \"video\" WHERE id IN ( SELECT CAST(videoid AS integer) FROM \"like\" WHERE userid='";
+			sql.append( userid );
+			sql.append( "')" );
+		
+		return this->toObjects(
+			this->query(2, sql)
+		);
+	}
+
+	std::vector<Video> getNotViewedVideos(std::string userid) {
+		std::string sql = "SELECT * FROM \"video\" WHERE id NOT IN ( SELECT CAST(videoid AS integer) FROM \"view\" WHERE userid='";
+			sql.append( userid );
+			sql.append( "') AND id NOT IN ( SELECT CAST(videoid AS integer) FROM \"like\" WHERE userid='");
+			sql.append( userid );
+			sql.append( "')" );
+		
+		return this->toObjects(
+			this->query(2, sql)
+		);
+	}
+
+	std::vector<Video> getAllVideos() {
+		std::string sql = "SELECT * FROM \"video\"";
+		
+		return this->toObjects(
+			this->query(2, sql)
+		);
+	}
 };

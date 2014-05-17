@@ -5,6 +5,7 @@
 }
 
 .play-controls {
+  position: absolute;
   float: left;
   display: inline-block;
   width: 20%;

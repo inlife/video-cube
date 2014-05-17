@@ -34,8 +34,11 @@ public:
 
 		btpl.set("content", tpl.render(false));
 
+		btpl.set("videoid", video.getId());
 		btpl.set("videourl", video.getUrl());
 		btpl.set("chunks", video.getChunks());
+		btpl.set("views", "0");
+		btpl.set("likes", "0");
 
 		std::cout << btpl.render();
 	}
@@ -53,7 +56,7 @@ public:
 		if (!us.isLogined()) return throw Exceptions::FormException("User not logined");
 
 		VideoService vs;
-		vs.like();
+		vs.like(us.getUser().getId());
 	}
 
 	void addAction() {
@@ -66,58 +69,34 @@ public:
 	}
 
 	void likesAction() {
-		std::map<std::string, std::string> data;
-		// sample data
-		data["id"] = "50";
-		data["title"] = "Lorem ipsum";
-		data["image"] = "img/temp/1.jpg";
+		UserService  us;
+		VideoService vs;
 
-		Template tpl("base");
+		if (!us.isLogined()) return this->redirect("user", "index");
 
-		for (int i = 0; i < 3; i++) {
-			Template line("main/_index-video-line");
+		User user = us.getUser();
 
-			for (int i = 0; i < 3; i++) {
-				Template box("main/_index-video-box");
-
-				box.set("id", data["id"]);
-				box.set("title", data["title"]);
-				box.set("image", data["image"]);
-
-				line.add("videoline", box.render(false));
-			}
-
-			tpl.add("content", line.render(false));
-		}
-
-		std::cout << tpl.render();
+		VideoTemplate btpl("base");
+		btpl.grid("content", vs.getLikedVideos(
+			user.getId()
+		));
+	
+		std::cout << btpl.render();
 	}
 
 	void recommendAction() {
-		std::map<std::string, std::string> data;
-		// sample data
-		data["id"] = "50";
-		data["title"] = "Lorem ipsum";
-		data["image"] = "img/temp/1.jpg";
+		UserService  us;
+		VideoService vs;
 
-		Template tpl("base");
+		if (!us.isLogined()) return this->redirect("user", "index");
 
-		for (int i = 0; i < 3; i++) {
-			Template line("main/_index-video-line");
+		User user = us.getUser();
 
-			for (int i = 0; i < 3; i++) {
-				Template box("main/_index-video-box");
-
-				box.set("id", data["id"]);
-				box.set("title", data["title"]);
-				box.set("image", data["image"]);
-
-				line.add("videoline", box.render(false));
-			}
-
-			tpl.add("content", line.render(false));
-		}
-
-		std::cout << tpl.render();
+		VideoTemplate btpl("base");
+		btpl.grid("content", vs.getRecommendVideos(
+			user.getId()
+		));
+	
+		std::cout << btpl.render();
 	}
 };

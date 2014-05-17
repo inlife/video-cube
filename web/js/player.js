@@ -14,9 +14,9 @@
 
 function Player(elementId , video_path, duration){
   this.videoPath  = video_path;
-  this.highPath   = this.videoPath+'/720/';
-  this.mediumPath = this.videoPath+'/360/';
-  this.poorPath   = this.videoPath+'/240/';
+  this.highPath   = this.videoPath+'720/';
+  this.mediumPath = this.videoPath+'360/';
+  this.poorPath   = this.videoPath+'240/';
   this.globalId   = elementId;
   this.counter = 0;
   this.partCounter = 0;

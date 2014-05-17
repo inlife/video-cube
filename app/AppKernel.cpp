@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <stdio.h>
+#include <math.h> 
 
 
 #include <boost/algorithm/string.hpp>
@@ -48,6 +49,8 @@
 
 #include "../src/Entity/UserRepository.cpp"
 #include "../src/Service/UserService.cpp"
+
+#include "../src/Template/VideoTemplate.cpp"
 
 #include "../src/Controller/MainController.cpp"
 #include "../src/Controller/UserController.cpp"
@@ -108,7 +111,7 @@ int main() {
         std::cout << e.getMessage() << std::endl;
 
     } catch (std::exception &e) {
-        std::cout << "Content-type: text/html\r\n\r\n";
+        std::cout << "Status: 500 Internal Server Error\r\n\n";
         std::cout << e.what();
     }
 	return 0;

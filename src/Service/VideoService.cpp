@@ -68,22 +68,22 @@ public:
 	}
 
 	std::string generateFolders(std::string userid, std::string videoid) {
-		std::string path = "uploads/user/" + userid + "/video/" + videoid + "/";
+		std::string path = "uploads/user_" + userid + "/video_" + videoid + "/";
 		Encoder::exec("mkdir -p " + path);
 		return path;
 	}
 
-	void like() {
-		Cooper::ParameterBag data = Cooper::Http::post();
+	void like(std::string userid) {
+		Cooper::ParameterBag data = Cooper::Http::get();
 
-		if (data.exists("userid") && data.exists("videoid")) {
+			std::cout << "Content-type: text/html\r\n\r\n";
+			std::cout << data.exists("videoid");
+		if (userid.size() > 0 && data.exists("videoid")) {
 
 			VideoRepository vr;
 
-			vr.like(
-				data.get("videoid"),
-				data.get("userid")
-			);
+			vr.like(data.get("videoid"), userid);
+
 
 		} else {
 			throw Cooper::Exceptions::FormException("Wrong request.");
@@ -99,5 +99,26 @@ public:
 			data.get("videoid"),
 			data.get("userid")
 		);
+		std::cout << "Content-type: text/html\r\n\r\n";
+	}
+
+	std::vector<Video> getUserVideos(std::string userid) {
+		VideoRepository vr;
+		return vr.getUserVideos(userid);
+	}
+
+	std::vector<Video> getLikedVideos(std::string userid) {
+		VideoRepository vr;
+		return vr.getLikedVideos(userid);
+	}
+
+	std::vector<Video> getRecommendVideos(std::string userid) {
+		VideoRepository vr;
+		return vr.getNotViewedVideos(userid);
+	}
+
+	std::vector<Video> getAllVideos() {
+		VideoRepository vr;
+		return vr.getAllVideos();
 	}
 };

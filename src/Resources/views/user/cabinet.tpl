@@ -7,46 +7,5 @@
 	</div>
 </article>
 <article>
-	<div class="line">
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">Lorem ipsum</a></span>
-		</div>
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">dolor sit amet</a></span>
-		</div>
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">contestatur simplicit elit</a></span>
-		</div>
-	</div>
-	<div class="line">
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">Lorem ipsum</a></span>
-		</div>
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">dolor sit amet</a></span>
-		</div>
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">contestatur simplicit elit</a></span>
-		</div>
-	</div>
-	<div class="line">
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">Lorem ipsum</a></span>
-		</div>
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">dolor sit amet</a></span>
-		</div>
-		<div class="block">
-			<div class="artwork"><img src="img/temp/1.jpg" /></div>
-			<span><a href="#">contestatur simplicit elit</a></span>
-		</div>
-	</div>
+	{{videos}}
 </article>

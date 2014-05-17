@@ -1,7 +1,7 @@
 namespace Cooper {
 
 	class Template {
-	private:
+	protected:
 		std::string content;
 		std::map<std::string, std::string> data;
 

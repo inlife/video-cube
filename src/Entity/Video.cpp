@@ -47,10 +47,10 @@ public:
 	}
 
 	std::string getUrl() {
-		return "uploads/user/" + this->getUserId() + "/video/" + this->getId() + "/";
+		return "uploads/user_" + this->getUserId() + "/video_" + this->getId() + "/";
 	}
 
 	std::string getPreview() {
-		return this->getUrl() + "/preview.jpeg";
+		return this->getUrl() + "preview.jpeg";
 	}
 };

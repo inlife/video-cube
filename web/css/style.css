@@ -321,12 +321,32 @@ input[type="submit"] {
 .like {
 	display: block;
 	width: 640px;
-	text-align: center;
+	text-align: right;
 	float: left;
 	padding: 15px 0px;
 }
 
 .like a {
+	margin-right: 15px;
 	display: inline-block;
 	margin-top: 0px;
 }
+
+.video h2 {
+	padding-top: 5px;
+}
+
+.player_counter {
+	font-family: "Helvetica Neue", Tahoma, sans-serif;
+	text-align: right;
+	color: #576e85;
+	margin-top: 25px;
+	margin-right: 15px;
+}
+
+.player_counter span {
+	text-align: right;
+	margin: 0;
+	padding: 0;
+}
+

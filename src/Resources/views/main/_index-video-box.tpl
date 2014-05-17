@@ -1,4 +1,6 @@
 <div class="block">
-	<div class="artwork"><img src="{{image}}" /></div>
-	<span><a href="#{{id}}">{{title}}</a></span>
+	<a href="{{baseurl}}?name=video&action=index&id={{id}}">
+		<div class="artwork"><img width="297px" height="200px" src="{{preview}}" /></div>
+		<span>{{title}}</span>
+	</a>
 </div>

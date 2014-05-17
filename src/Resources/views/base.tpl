@@ -3,6 +3,7 @@
 	<head lang="en">
 		<meta charset="utf-8" />
 		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/player.css" rel="stylesheet" />
 		<title>VideoCube</title>
 	</head>
 	<body>
@@ -40,6 +41,25 @@
 				if ($("#vc-player").length > 0) {
 					var player = new Player("vc-player", "{{videourl}}", "{{chunks}}");
 					player.startVideo();
+
+					//like
+					$("#like").click(function(e) {
+						e.preventDefault();
+
+						$.ajax({
+				            url: '{{baseurl}}?name=video&action=like&type=ajax&videoid={{videoid}}',  
+				            type: 'POST',
+				            success: function(data) {
+				            	console.log(data);
+				            }, 
+						    error: function(data) {
+						    	alert(data.responseText);
+						    },
+				            cache: false,
+				            contentType: false,
+				            processData: false
+				        });
+					});
 				}
 			})();
 
@@ -51,15 +71,10 @@
 
 				function startUploading() {
 					uploading = true;
-					var fileName;
-					document.getElementById('fileinfo').onchange = 
-					function(){
-						fileName = this.value;
-   					};
 					timerid = setInterval(function() {
-						if (iter === 0) {$('input[type=submit]').val(fileName+"."); iter = 1}
-						else if (iter === 1) {$('input[type=submit]').val(fileName+".."); iter = 2}
-						else if (iter === 2) {$('input[type=submit]').val(fileName+"..."); iter = 0}
+						if (iter === 0) {$('input[type=submit]').val("."); iter = 1}
+						else if (iter === 1) {$('input[type=submit]').val(". ."); iter = 2}
+						else if (iter === 2) {$('input[type=submit]').val(". . ."); iter = 0}
 					}, 500);
 				}
 

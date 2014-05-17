@@ -33,14 +33,20 @@ public:
 	}
 
 	void cabinetAction() {
-		UserService us;
+		UserService  us;
+		VideoService vs;
+
 		if (!us.isLogined()) return this->redirect("user", "index");
 
-		Template btpl("base");
-		Template tpl("user/cabinet");
+		User user = us.getUser();
 
-		tpl.set("message", "Hello guest, please log in or register!");
-		tpl.set("userlogin", us.load().getLogin());
+		Template btpl("base");
+		VideoTemplate tpl("user/cabinet");
+
+		tpl.set("userlogin", user.getLogin());
+		tpl.grid("videos", vs.getUserVideos(
+			user.getId()
+		));
 
 		btpl.set("content", tpl.render(false));
 	
