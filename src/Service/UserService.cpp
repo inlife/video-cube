@@ -25,6 +25,10 @@ public:
 		return user;
 	}
 
+	User getUser() {
+		return this->load();
+	}
+
 	User create(Cooper::ParameterBag data) {
 
 		if (this->isLogined()) throw Cooper::Exceptions::FormException("Already logined in.");

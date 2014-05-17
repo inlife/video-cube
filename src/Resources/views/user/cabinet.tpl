@@ -29,9 +29,7 @@
 					<div class="line">
 						<img src="img/userpic.jpg" class="userpic" />
 						<h3>Welcome, {{userlogin}}</h3>
-						<form method="post">
-							<input type="submit" value="Add video" />
-						</form>
+						<a href="{{baseurl}}?name=video&action=add"><input type="submit" value="Add video"></a>
 					</div>
 				</article>
 				<article>

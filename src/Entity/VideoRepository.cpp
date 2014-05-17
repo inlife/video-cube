@@ -1,25 +1,43 @@
 class VideoRepository : public Cooper::EntityRepository {
 public: 
-	std::vector<Video> getByUserId(std::string id) {
-		std::vector<Video> videos;
+	
+	Video create(std::string userid, std::string title) {
 
-		return videos;
+		std::string sql = "INSERT INTO \"video\" (userid, title, chunks) VALUES ('";
+			sql.append( userid );
+			sql.append( "', '" );
+			sql.append( title );
+			sql.append( "', '0')" );
+
+			this->query(1, sql);
+
+		return this->load(userid, title);
 	}
-	/*
-	Video create(std::string userId, std::string name){
-		//Video video = Video(createVideoFolder(userId, name), name, userId);
-		return Video();	
+
+	Video load(std::string userid, std::string title) {
+
+		std::string sql = "SELECT * FROM \"video\" WHERE userid='";
+			sql.append( userid );
+			sql.append( "' AND title='" );
+			sql.append( title );
+			sql.append( "' ORDER BY id DESC LIMIT 1" );
+		
+		std::vector<Cooper::ParameterBag> result = this->query(2, sql);
+		
+		Video video = Video();
+
+		video.setId(result[0]["id"]);
+		video.setTitle(result[0]["title"]);
+		video.setUserId(result[0]["userid"]);
+
+		return video;
 	}
 
-	std::string createVideoFolder(std::string usetId){
-		std::string folder;
+	void updateChunks(Video video) {
+		std::string sql = "UPDATE \"video\" SET (chunks='";
+			sql.append( video.getChunks() );
+			sql.append( "')" );
 
-		//Folder is created in windows standart. Replace it with Unix standart
-		folder = "users\\" + userId + "\\" + name;
-
-		const char _dirPath[] = folder.c_str();
-		boost::filesystem::path dir(_dirPath);
-		return folder;
-		return std::string();
-	}*/
+			this->query(1, sql);
+	}
 };

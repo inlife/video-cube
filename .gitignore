@@ -16,3 +16,7 @@
 
 app/boost/*
 *.cgi
+web/uploads/*
+
+app/ffmpeg
+app/ffprobe

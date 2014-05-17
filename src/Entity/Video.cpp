@@ -1,18 +1,52 @@
 class Video {
+	std::string id;
+	std::string userid;
 	std::string name;
-	std::string preview;
-	std::string authorId;
-	std::string path;
+	std::string chunks;
 
 public:
-	Video(std::string path, std::string name, std::string id){
+	Video(std::string userid, std::string name){
+		this->id = "0";
+		this->userid = userid;
 		this->name = name;
-		this->preview = path + "\\preview.jpg";
-		this->authorId = id;
+		this->chunks = "0";
 	}
 
-	std::string getName(){
+	Video() {};
+
+	std::string getId() {
+		return this->id;
+	}
+
+	void setId(std::string id) {
+		this->id = id;
+	}
+
+	std::string getUserId() {
+		return this->userid;
+	}
+
+	void setUserId(std::string userid) {
+		this->userid = userid;
+	}
+
+	std::string getTitle() {
 		return this->name;
 	}
 
+	void setTitle(std::string name) {
+		this->name = name;
+	}
+
+	std::string getChunks() {
+		return this->chunks;
+	}
+
+	void setChunks(std::string chunks) {
+		this->chunks = chunks;
+	}
+
+	std::string getPreview() {
+		return "uploads/user/" + this->getUserId() + "/video/" + this->getId() + "/preview.jpeg";
+	}
 };

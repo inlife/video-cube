@@ -3,6 +3,7 @@ Cooper::Http::_router loadRouting() {
 
 	router["main"] = new MainController();
 	router["user"] = new UserController();
+	router["video"] = new VideoController();
 
 	return router;
 }

@@ -9,14 +9,26 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <stdio.h>
 
 
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string/iter_find.hpp>
+#include <boost/algorithm/string/finder.hpp>
+#include <boost/lexical_cast.hpp>
 //#include <boost/filesystem.hpp>
 
 #include <pqxx/pqxx> 
+
+#include <cgicc/CgiDefs.h> 
+#include <cgicc/Cgicc.h> 
+#include <cgicc/HTTPHTMLHeader.h> 
+#include <cgicc/HTMLClasses.h>
+
+#include "../src/Encoder.h"
 
 #include "Cooper/NotFoundException.cpp"
 #include "Cooper/InternalErrorException.cpp"
@@ -27,17 +39,23 @@
 #include "Cooper/Template.cpp"
 #include "Cooper/EntityRepository.cpp"
 
+
 #include "../src/Entity/Video.cpp"
-#include "../src/Entity/VideoRepository.cpp"
 #include "../src/Entity/User.cpp"
+
+#include "../src/Entity/VideoRepository.cpp"
+#include "../src/Service/VideoService.cpp"
+
 #include "../src/Entity/UserRepository.cpp"
 #include "../src/Service/UserService.cpp"
+
 #include "../src/Controller/MainController.cpp"
 #include "../src/Controller/UserController.cpp"
+#include "../src/Controller/VideoController.cpp"
+
 #include "../src/Resources/config/routing.cpp"
 #include "../src/Resources/config/parameters.cpp"
 
-//#include "../src/Encoder.h"
 
 //char *value = std::getenv( ENV[ i ].c_str() );  
 const std::string ENV[ 24 ] = {                 
@@ -65,10 +83,19 @@ int main() {
 			throw Cooper::Exceptions::NotFoundException();
 		}
 	} catch (Cooper::Exceptions::FormException &e) {
-        Template tpl = Template("error/index");
 
-        tpl.set("message", e.getMessage());
-        std::cout << tpl.render();
+        if (params.get("type") == "ajax") {
+
+            std::cout << "Status: 500 Internal Server Error\r\n\n";
+            std::cout << e.getMessage();
+
+        } else {
+
+            Template tpl = Template("error/index");
+
+            tpl.set("message", e.getMessage());
+            std::cout << tpl.render();
+        }
 
     } catch (Cooper::Exceptions::NotFoundException &e) {
 

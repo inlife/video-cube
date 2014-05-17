@@ -1,4 +1,6 @@
-class MainController : public Cooper::Controller {
+using namespace Cooper;
+
+class MainController : public Controller {
 private:
 	std::map <std::string, void(MainController::*)()> _methods;
 
@@ -6,10 +8,9 @@ public:
 
 	void _callAction(std::string name) {
 		if (this->_methods.find(name) != this->_methods.end()) {
-			this->sendOKHeaders();
 			(*this.*_methods[name])();
 		} else {
-			throw Cooper::Exceptions::NotFoundException();
+			throw Exceptions::NotFoundException();
 		}
 	}
 
@@ -18,8 +19,6 @@ public:
 	}
 
 	void indexAction() {
-		using namespace Cooper;
-
 		std::map<std::string, std::string> data;
 		// sample data
 		data["id"] = "50";

@@ -8,10 +8,9 @@ public:
 
 	void _callAction(std::string name) {
 		if (this->_methods.find(name) != this->_methods.end()) {
-			this->sendOKHeaders();
 			(*this.*_methods[name])();
 		} else {
-			throw Cooper::Exceptions::NotFoundException();
+			throw Exceptions::NotFoundException();
 		}
 	}
 
@@ -25,7 +24,6 @@ public:
 	void indexAction() {
 		UserService us = UserService();
 		if (us.isLogined()) this->redirect("user", "cabinet");
-		
 
 		Template tpl = Template("user/index");
 		tpl.set("message", "Hello guest, please log in or register!");
@@ -37,7 +35,6 @@ public:
 		UserService us = UserService();
 		if (!us.isLogined()) this->redirect("user", "index");
 		
-
 		Template tpl = Template("user/cabinet");
 		tpl.set("message", "Hello guest, please log in or register!");
 		tpl.set("userlogin", us.load().getLogin());

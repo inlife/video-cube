@@ -37,10 +37,4 @@ public:
 	void setPassword(std::string password) {
 		this->password = password;
 	}
-
-	std::vector<Video> getUserVideos() {
-		VideoRepository vr = VideoRepository();
-
-		return vr.getByUserId(this->id);
-	}
 };
