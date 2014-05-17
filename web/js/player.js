@@ -18,6 +18,7 @@ function Player(elementId , video_path, duration){
   this.mediumPath = this.videoPath+'/360/';
   this.poorPath   = this.videoPath+'/240/';
   this.globalId   = elementId;
+  this.wrapperId  = 'video_player_wrapper';
   this.counter = 0;
   this.partCounter = 0;
   this.playable = true;
@@ -26,38 +27,28 @@ function Player(elementId , video_path, duration){
   this.quality = 1;
   this.lock = true;
   this.newTime = false;
+  this.fullscreen = false;
 
   this.createDom();
 }
 Player.prototype.createVideo = function(itemId){
-  item = document.getElementById(itemId);
-  if(item){
+  this.loadStarted();
+  if(document.getElementById(itemId)){ // если уже такой открывок есть
     return false;
   }
-  item = document.createElement('video');
-  item.setAttribute('id', itemId);
-  inner = '<source src="'+(this.getPath()+this.counter)+'.mp4" type="video/mp4">'
-  item.innerHTML = inner;
-  item.style.display = 'none';
+  videoItem = $("<video id='"+itemId+"' src='"+(this.getPath()+this.counter)+".mp4'></video>");
 
-  startTime = (new Date()).getTime();
-  this.lock = false;
-  item.load()
-  this.lock = true;
+  videoItem.on('loadedmetadata', { player: this }, function(event){
+    event.data.player.loadEnded();
+  });
 
-  endTime = (new Date()).getTime();
-  this.setPath(endTime-startTime);
+  videoItem.hide();
 
-  this.playerItem.appendChild(item);
+  $(this.playerItem).append(videoItem);
 }
 
 Player.prototype.hideVideo = function(itemId){
-  item = document.getElementById(itemId);
-  if(item){
-    item.pause();
-    item.currentTime = 0;
-    item.style.display = 'none';
-  }
+  $('#'+itemId).remove();
 }
 
 Player.prototype.showVideo = function(itemId){
@@ -68,7 +59,10 @@ Player.prototype.showVideo = function(itemId){
   item.style.height  = '100%';
 }
 Player.prototype.update = function() {
-
+  console.log({lock: this.lock, part: this.counter, playable: this.playable, counter: this.partCounter, quality: this.quality, fullscreen: this.fullscreen});
+  if(!this.lock) {
+    this.partCounter--;
+  }
   if((this.counter<this.parts)&&(this.partCounter%10==0)&&this.playable){
     this.partCounter = 0;
 
@@ -85,7 +79,9 @@ Player.prototype.update = function() {
 
       this.createVideo(this.newVideoId);
 
-    } else {
+      this.partCounter++;
+
+    } else if(this.lock) {
 
       this.oldVideoId = this.globalId+(this.counter-1);
       this.hideVideo(this.oldVideoId);
@@ -100,12 +96,8 @@ Player.prototype.update = function() {
     }
   }
 
-  // console.log($('.player-controls.rewind'));
-  $('.player-controls.rewind').val(this.counter);
-
-  if(this.playable&&this.lock){
-    this.partCounter++;
-  }
+  this.partCounter++;
+  $('.player-controls.rewind').val(this.counter-1);
 }
 
 Player.prototype.pauseVideo = function(){
@@ -130,24 +122,11 @@ Player.prototype.startVideo = function(){
 
 Player.prototype.setPath = function(time){
 
- if(time<5){
-    switch(this.quality){
-      case 0:
-        this.quality=1;
-        break;
-      case 1:
-        this.quality=2;
-        break;
-    }
-  } else {
-    switch(this.quality){
-      case 2:
-        this.quality=1;
-        break;
-      case 1:
-        this.quality=0;
-        break;
-    }
+ if(time<4000){
+    if(this.quality<2) this.quality++;
+  }
+  if(time>6000){
+    if(this.quality>0) this.quality--;
   }
 }
 
@@ -162,7 +141,7 @@ Player.prototype.getPath = function(){
   }
 }
 
-Player.prototype.goTo = function(value) {
+Player.prototype.goTo = function(value){
   this.partCounter = 0;
   this.hideVideo(this.globalId + (this.counter - 1));
   this.newTime = true;
@@ -170,12 +149,14 @@ Player.prototype.goTo = function(value) {
 }
 
 Player.prototype.createDom = function(){
-  $('#' + this.globalId).append('<div id="player_videos"></div>')
-  $('#' + this.globalId).append('<div class="play-controls"></div>')
-  $('#' + this.globalId).append('<div class="rewind-controls"></div>')
-  $('#' + this.globalId + ' .play-controls').append('<button class="player-controls play">Play</button>')
-  $('#' + this.globalId + ' .play-controls').append('<button class="player-controls pause">Pause</button>')
-  $('#' + this.globalId + ' .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
+  $('#' + this.globalId).append('<div id="'+this.wrapperId+'"></div>')
+  $('#' + this.wrapperId).append('<div id="player_videos"></div>')
+  $('#' + this.wrapperId).append('<div class="play-controls"></div>')
+  $('#' + this.wrapperId).append('<div class="rewind-controls"></div>')
+  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls play">▶</button>')
+  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls pause">||</button>')
+  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls fullscreen">⬚</button>')
+  $('#' + this.wrapperId + ' .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
 
   this.playerItem = document.getElementById('player_videos');
   this.setEvents()
@@ -193,4 +174,31 @@ Player.prototype.setEvents = function(){
   $('.player-controls.rewind').on('change', { player: this }, function(event){
     event.data.player.goTo($(this).val());
   })
+
+  $('.player-controls.fullscreen').on('click', { player: this }, function(event){
+    event.data.player.toggleFullScreen();
+  })
+}
+
+Player.prototype.loadStarted = function(){
+  this.lock = false;
+  this.loadingTime = Date.now();
+}
+
+Player.prototype.loadEnded = function(){
+  this.lock = true;
+  this.loadingTime = Date.now() - this.loadingTime;
+  this.setPath(this.loadingTime);
+}
+
+Player.prototype.toggleFullScreen = function(){
+  if(this.fullscreen){
+    this.fullscreen = false;
+    wrapper.attr("style", "");
+  } else {
+    this.fullscreen = true;
+    wrapper = $('#' + this.wrapperId);
+    style = "position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 100;"
+    wrapper.attr("style", style);
+  }
 }
