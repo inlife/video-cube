@@ -1,3 +1,4 @@
+// Implementing user entity
 class User {
 	std::string id;
 	std::string login;

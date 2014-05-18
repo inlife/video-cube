@@ -1,15 +1,14 @@
 namespace Cooper {
 
+	// Basic Template Engine
 	class Template {
 	protected:
 		std::string content;
 		std::map<std::string, std::string> data;
 
-		void loadUrls() {
-			//router;
-		}
-
 	public:
+
+		// Reading file and save it into content
 		void open(std::string name) {
 			std::ifstream ifs("../src/Resources/views/" + name + ".tpl");
 			std::string content( (std::istreambuf_iterator<char>(ifs) ),
@@ -18,10 +17,12 @@ namespace Cooper {
 			return;
 		}
 
+		// Setting data
 		void set(std::string name, std::string value) {
 			this->data[name] = value;
 		}
 
+		// Concatenating data
 		void add(std::string name, std::string value) {
 			if (this->data.find(name) == this->data.end()) {
 				this->set(name, "");
@@ -29,6 +30,7 @@ namespace Cooper {
 			this->data[name].append(value);
 		}
 
+		// Render template into variable
 		std::string render(bool header) {
 			std::string _header = "Content-type: text/html\r\n\r\n";
 			std::string _lcontent = this->content;
@@ -48,9 +50,9 @@ namespace Cooper {
 			return this->render(true);
 		}
 
+		// Template constructor
 		Template(std::string name) {
 			this->add("baseurl", Http::getBaseUrl());
-			this->loadUrls();
 			this->open(name);
 		}
 	};

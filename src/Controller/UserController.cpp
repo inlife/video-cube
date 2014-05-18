@@ -1,5 +1,6 @@
 using namespace Cooper;
 
+// Handle response to work with user actions
 class UserController : public Controller {
 private:
 	std::map <std::string, void(UserController::*)()> _methods;
@@ -22,6 +23,7 @@ public:
 		this->_methods["register"] = &UserController::registerAction;
 	}
 
+	// Handle if you logined in
 	void indexAction() {
 		UserService us = UserService();
 		if (us.isLogined()) return this->redirect("user", "cabinet");
@@ -32,6 +34,7 @@ public:
 		std::cout << tpl.render();
 	}
 
+	// Render cabinet
 	void cabinetAction() {
 		UserService  us;
 		VideoService vs;

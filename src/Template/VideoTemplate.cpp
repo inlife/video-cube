@@ -1,5 +1,6 @@
 using namespace Cooper;
 
+// Video template grid
 class VideoTemplate : public Template {
 public:
 	void grid(std::string name, std::vector<Video> videos) {

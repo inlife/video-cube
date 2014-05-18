@@ -1,6 +1,8 @@
+// Getting user data
 class UserRepository : public Cooper::EntityRepository {
 public:
 
+	// Check method
 	bool exists(std::string login, std::string password) {
 		std::string sql = "SELECT COUNT(*) FROM \"user\" WHERE login='";
 			sql.append( login );
@@ -23,7 +25,6 @@ public:
 	}
 
 	User load(std::string login, std::string password) {
-
 		std::string sql = "SELECT * FROM \"user\" WHERE login='";
 			sql.append( login );
 			sql.append( "' AND password='" );
@@ -41,6 +42,7 @@ public:
 		return user;
 	}
 
+	// Create a new user
 	User create(std::string login, std::string password) {
 		
 		std::string sql = "INSERT INTO \"user\" (login, password) VALUES ('";

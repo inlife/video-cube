@@ -1,6 +1,8 @@
+// Implementation of user Services
 class UserService {
 public:
 
+	// Chek if logged in
 	bool isLogined() {
 		Cooper::ParameterBag data = Cooper::Http::cookies();
 		UserRepository repository = UserRepository();
@@ -12,6 +14,7 @@ public:
 		return false;
 	}
 
+	// Load, using ParametrBag data
 	User load() {
 		Cooper::ParameterBag data = Cooper::Http::cookies();
 		UserRepository repository = UserRepository();
@@ -24,6 +27,7 @@ public:
 		return user;
 	}
 
+	// Save some cookies 
 	void logout() {
 		Cooper::Http::setCookie("login", "");
 		Cooper::Http::setCookie("password", "");
@@ -33,6 +37,7 @@ public:
 		return this->load();
 	}
 
+	// User creation Service
 	User create(Cooper::ParameterBag data) {
 
 		if (this->isLogined()) throw Cooper::Exceptions::FormException("Already logined in.");
@@ -62,6 +67,7 @@ public:
 		}
 	}
 
+	// User login Service
 	User login(Cooper::ParameterBag data) {
 
 		if (this->isLogined()) throw Cooper::Exceptions::FormException("Already logined in.");

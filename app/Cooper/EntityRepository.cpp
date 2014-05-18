@@ -1,8 +1,10 @@
 namespace Cooper {
 	
+	// Base class for other repositories
 	class EntityRepository {
 	protected:
 
+		// Establishing connection with DB
 		std::vector<ParameterBag> query(int type, std::string sql) {
 			std::vector<ParameterBag> result;
 
@@ -17,26 +19,24 @@ namespace Cooper {
 			if (C.is_open()) {
 				if (type == 1) {
 					
-					//transactional
+					// Transactional
 					pqxx::work W(C);
 		      
 					W.exec( sql );
 					W.commit();
 
 				} else {
-					// non-transactional
+					// Non-transactional
 					pqxx::nontransaction N(C);
 	      
-					/* Execute SQL query */
+					// Execute SQL query
 					pqxx::result R( N.exec( sql ));
 
+					// Formating query results
 					for (pqxx::result::const_iterator c = R.begin(); c != R.end(); ++c) {
-						//std::map<std::string, std::string> row;
 						ParameterBag row;
 
 						for (pqxx::const_tuple_iterator i = c.begin(); i != c.end(); ++i) {
-							//row[i.name()] = i.as<std::string>();
-							//std::cout << i.name() << " --- " << i.as<std::string>() << std::endl;
 							row.add(i.name(),  i.as<std::string>());
 						}
 

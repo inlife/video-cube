@@ -1,14 +1,15 @@
 namespace Cooper {
+
+	// Defining of undefined functions
 	namespace Http {
 		std::string getBaseUrl();
 	}
+	
+	// Base class to handle user actions 
 	class Controller {
 	public:
-		virtual void _callAction(std::string name) {}
 
-		void sendOKHeaders() {
-			//std::cout << "Content-type: text/html\r\n\r\n";
-		}
+		virtual void _callAction(std::string name) {}
 
 		void redirect(std::string name, std::string action) {
 

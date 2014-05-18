@@ -1,5 +1,6 @@
 using namespace Cooper;
 
+// Set params for DB connection
 void loadParams() {
 	config["dbname"] = "videocube";
 	config["user"] = "postgres";

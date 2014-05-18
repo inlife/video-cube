@@ -6,6 +6,7 @@ namespace Cooper {
 
 		typedef std::map <std::string, Controller*> _router;
 
+		// Getting base url of aplication
 		std::string getBaseUrl() {
 			std::string host = std::getenv("HTTP_HOST");
 			std::string path = std::getenv("SCRIPT_NAME");
@@ -15,23 +16,25 @@ namespace Cooper {
 			return "http://" + host + path;
 		}
 
+		// Decoding url
 		std::string urlDecode(std::string SRC) {
 		    std::string ret;
 		    char ch;
 		    int i, ii;
-		    for (i=0; i<SRC.length(); i++) {
+		    for (i = 0; i < SRC.length(); i++) {
 		        if (int(SRC[i])==37) {
 		            std::sscanf(SRC.substr(i+1,2).c_str(), "%x", &ii);
-		            ch=static_cast<char>(ii);
-		            ret+=ch;
-		            i=i+2;
+		            ch = static_cast<char>(ii);
+		            ret += ch;
+		            i = i + 2;
 		        } else {
-		            ret+=SRC[i];
+		            ret += SRC[i];
 		        }
 		    }
 		    return (ret);
-		}		
+		}	
 
+		// Encoding url
 		std::string urlEncode(const std::string &value) {
 			using namespace std;
 
@@ -55,6 +58,7 @@ namespace Cooper {
 		    return escaped.str();
 		}
 
+		// Parsing string into ParameterBag
 		ParameterBag parseParams(std::string query) {
 
 			using namespace boost::algorithm;
@@ -75,13 +79,7 @@ namespace Cooper {
 		    return params;
 		}
 
-		std::string getBoundary() 
-		{
-			std::string line = std::getenv("CONTENT_TYPE");
-			boost::algorithm::replace_all(line, "multipart/form-data; boundary=", "");
-			return line;
-		}
-
+		// Getting cookies
 		ParameterBag cookies() {
 			char const* tmp = getenv( "HTTP_COOKIE" );
 			if ( tmp == NULL ) {
@@ -90,14 +88,15 @@ namespace Cooper {
 			    std::string line( tmp );
 			    boost::algorithm::replace_all(line, "; ", "&");
 				return parseParams(line);
-			    //return ParameterBag();
 			}
 		}
 
+		// Setting cookie
 		void setCookie(std::string name, std::string value) {
 			std::cout << "Set-Cookie:" + name + "=" + urlEncode(value) + ";\r\n";
 		}
 
+		// Getting HTTP GET params
 		ParameterBag get() {
 			ParameterBag params = parseParams(std::getenv("QUERY_STRING"));
 
@@ -110,6 +109,7 @@ namespace Cooper {
 		    return params;
 		}
 
+		// Getting HTTP POST params
 		ParameterBag post()
 		{
 			using namespace std;

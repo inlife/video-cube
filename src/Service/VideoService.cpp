@@ -1,6 +1,8 @@
+// Implementation of video Services
 class VideoService {
 public:
 
+	// Getting video depending on user logged in
 	Video getPlayerVideo() {
 		Cooper::ParameterBag data = Cooper::Http::get();
 		
@@ -15,6 +17,7 @@ public:
 		}
 	}
 
+	// Uploading video from specified User
 	void upload(User user) {
 		cgicc::Cgicc cgi;
 
@@ -34,25 +37,25 @@ public:
 
 			VideoRepository vr;
 
-			// TODO: add video to database
+			// Add video to database
 			Video video = vr.create(user.getId(), title);
 
-			// TODO: generate folder structure
+			// Generate folder structure
 			std::string path = this->generateFolders(
 				video.getUserId(), video.getId()
 			);
 
-			// TODO: execute conversion
+			// Execute conversion
 			int _chunks = Encoder::convertVideo(
 				10, "uploads/tmp/" + file->getFilename(), path
 			);
 			std::string chunks =  boost::lexical_cast<std::string>(_chunks);
 			
-			// TODO: update video in database
+			// Update video in database
 			video.setChunks(chunks);
 			vr.updateChunks(video);
 
-			// TODO: remove video from tmp
+			// Remove video from tmp
 			this->removeTmp("uploads/tmp/" + file->getFilename());
 
 			std::cout << "Content-type: text/html\r\n\r\n";
@@ -67,12 +70,14 @@ public:
 		Encoder::exec("rm " + name);
 	}
 
+	// Make some folders for video storage
 	std::string generateFolders(std::string userid, std::string videoid) {
 		std::string path = "uploads/user_" + userid + "/video_" + videoid + "/";
 		Encoder::exec("mkdir -p " + path);
 		return path;
 	}
 
+	// Like Service implementation
 	void like(std::string userid) {
 		Cooper::ParameterBag data = Cooper::Http::get();
 
@@ -87,6 +92,7 @@ public:
 		}
 	}
 
+	// Video views Service
 	void view(std::string userid) {
 		Cooper::ParameterBag data = Cooper::Http::get();
 
@@ -95,6 +101,7 @@ public:
 		vr.view(data.get("videoid"), userid);
 	}
 
+	// Video Getters section
 	std::vector<Video> getUserVideos(std::string userid) {
 		VideoRepository vr;
 		return vr.getUserVideos(userid);

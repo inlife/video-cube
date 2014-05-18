@@ -1,5 +1,6 @@
 using namespace Cooper;
 
+// Main page rendering
 class MainController : public Controller {
 private:
 	std::map <std::string, void(MainController::*)()> _methods;
