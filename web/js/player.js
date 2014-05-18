@@ -171,9 +171,9 @@ Player.prototype.createDom = function(){
   $('#' + this.wrapperId).append('<div class="controls"></div>')
   $('#' + this.wrapperId + ' .controls').append('<div class="play-controls"></div>')
   $('#' + this.wrapperId + ' .controls').append('<div class="rewind-controls"></div>')
-  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls play">▶</button>')
-  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls pause">||</button>')
-  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls fullscreen">⬚</button>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls play"></button>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls pause"></button>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls fullscreen"></button>')
   $('#' + this.wrapperId + ' .controls .play-controls').append('<input class="player-controls volume" type="range" min="0" max="100" value="70" />')
   $('#' + this.wrapperId + ' .controls .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
 
