@@ -29,15 +29,14 @@ function Player(elementId , video_path, duration, watch){
   this.newTime = false;
   this.fullscreen = false;
   this.watch = watch;
-  this.watched = false;
 
   this.createDom();
 }
 Player.prototype.createVideo = function(itemId){
-  this.loadStarted();
   if(document.getElementById(itemId)){ // если уже такой открывок есть
     return false;
   }
+  this.loadStarted();
   videoItem = $("<video id='"+itemId+"' src='"+(this.getPath()+this.counter)+".mp4'></video>");
 
   videoItem.on('loadedmetadata', { player: this }, function(event){
@@ -64,10 +63,7 @@ Player.prototype.update = function() {
   console.log({lock: this.lock, part: this.counter, playable: this.playable, counter: this.partCounter, quality: this.quality, fullscreen: this.fullscreen});
 
   if(this.counter > (this.parts/2)){
-    if(!this.watched){
-      this.watch();
-      this.watched = true;
-    }
+    this.watch();
   }
   if(!this.lock) {
     this.partCounter--;
