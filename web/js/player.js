@@ -100,8 +100,9 @@ Player.prototype.update = function() {
       setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
     }
   }
-
-  this.partCounter++;
+  if(this.playable){
+    this.partCounter++;
+  }
   $('.player-controls.rewind').val(this.counter-1);
 }
 
