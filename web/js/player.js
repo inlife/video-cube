@@ -113,10 +113,12 @@ Player.prototype.pauseVideo = function(){
   this.playable = false;
 }
 Player.prototype.playVideo = function(){
-  itemId = this.globalId+(this.counter-1);
-  item = document.getElementById(itemId);
-  item.play();
   this.playable = true;
+  if(!this.newTime){
+    itemId = this.globalId+(this.counter-1);
+    item = document.getElementById(itemId);
+    item.play();
+  }
 }
 
 Player.prototype.startVideo = function(){
