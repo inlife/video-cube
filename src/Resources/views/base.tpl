@@ -40,6 +40,7 @@
 		    (function() {
 				if ($("#vc-player").length > 0) {
 					var player = new Player("vc-player", "{{videourl}}", "{{chunks}}", function() {
+						console.log("view-query");
 						$.ajax({
 				            url: '{{baseurl}}?name=video&action=view&type=ajax&videoid={{videoid}}',  
 				            type: 'POST',
