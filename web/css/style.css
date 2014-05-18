@@ -89,7 +89,7 @@ a.button {
 nav {
 	background: #2e3236;
 }
-	
+
 nav a {
 	color: #fff;
 	font-size: 24px;
@@ -148,7 +148,7 @@ article .block:last-child {
 .artwork {
 	width: 100%;
 	height: 200px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .artwork img {
@@ -269,7 +269,7 @@ article .block:last-child {
 }
 
 
-.upload { 
+.upload {
 	border: 6px dashed #ddd;
 	margin: 30px 0px 0px 0px;
 	width: 348px;
