@@ -31,14 +31,19 @@ function Player(elementId , video_path, duration, watch){
   this.watch = watch;
   this.watched = false;
   this.createDom();
+  this.volume = 0.7;
+
+  $(this).on("loaded", { player: this }, function(event){
+    event.data.player.createVideo(event.data.player.newVideoId);
+  })
 }
 Player.prototype.createVideo = function(itemId){
   if(document.getElementById(itemId)){ // если уже такой открывок есть
     return false;
   }
-  this.loadStarted();
   videoItem = $("<video id='"+itemId+"' src='"+(this.getPath()+this.counter)+".mp4?"+Math.random()+"'></video>");
 
+  this.loadStarted();
   videoItem.on('loadedmetadata', { player: this }, function(event){
     event.data.player.loadEnded();
   });
@@ -55,9 +60,11 @@ Player.prototype.hideVideo = function(itemId){
 Player.prototype.showVideo = function(itemId){
   item = document.getElementById(itemId);
   item.play();
+  item.volume = this.volume;
   item.style.display = 'block';
   item.style.width   = '100%';
   item.style.height  = '100%';
+  this.partCounter = 0;
 }
 Player.prototype.update = function() {
   console.log({lock: this.lock, part: this.counter, playable: this.playable, counter: this.partCounter, quality: this.quality, fullscreen: this.fullscreen});
@@ -68,11 +75,8 @@ Player.prototype.update = function() {
       this.watched = true;
     }
   }
-  if(!this.lock) {
-    this.partCounter--;
-  }
-  if((this.counter<this.parts)&&(this.partCounter>=10)&&this.playable){
-    this.partCounter = 0;
+
+  if((this.counter<this.parts)&&(this.partCounter>=10)&&this.playable&&this.lock){
 
     if(this.counter == 0 || this.newTime) {
       this.newTime = false;
@@ -82,14 +86,16 @@ Player.prototype.update = function() {
       this.createVideo(newVideoId);
       this.showVideo(newVideoId);
 
+      this.currentVideoId = newVideoId;
+
       this.counter++;
       this.newVideoId = this.globalId+this.counter;
 
-      setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
+      // setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
 
       this.partCounter++;
 
-    } else if(this.lock) {
+    } else {
 
       this.oldVideoId = this.globalId+(this.counter-1);
       this.hideVideo(this.oldVideoId);
@@ -100,12 +106,13 @@ Player.prototype.update = function() {
       this.counter++;
       this.newVideoId = this.globalId+this.counter;
 
-      setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
+      setTimeout(function(){ $(this).trigger("loaded") }.bind(this), 1000);
     }
   }
   if(this.playable){
     this.partCounter++;
   }
+
   $('.player-controls.rewind').val(this.counter-1);
 }
 
@@ -132,7 +139,6 @@ Player.prototype.startVideo = function(){
 }
 
 Player.prototype.setPath = function(time){
-
  if(time<4000){
     if(this.quality<2) this.quality++;
   }
@@ -167,6 +173,7 @@ Player.prototype.createDom = function(){
   $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls play">▶</button>')
   $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls pause">||</button>')
   $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls fullscreen">⬚</button>')
+  $('#' + this.wrapperId + ' .play-controls').append('<input class="player-controls volume" type="range" min="0" max="100" value="70" />')
   $('#' + this.wrapperId + ' .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
 
   this.playerItem = document.getElementById('player_videos');
@@ -186,20 +193,40 @@ Player.prototype.setEvents = function(){
     event.data.player.goTo($(this).val());
   })
 
+  $('.player-controls.volume').on('change', { player: this }, function(event){
+    event.data.player.setVolume($(this).val());
+  })
+
   $('.player-controls.fullscreen').on('click', { player: this }, function(event){
     event.data.player.toggleFullScreen();
   })
+
+  $('#player_videos').on('click', { player: this }, function(event){
+    if(event.data.player.playable){
+      event.data.player.pauseVideo();
+    } else {
+      event.data.player.playVideo();
+    }
+  })
+}
+
+Player.prototype.setVolume = function(val){
+  this.volume = parseInt(val)/100.0;
+  document.getElementById(this.currentVideoId).volume = this.volume;
 }
 
 Player.prototype.loadStarted = function(){
-  this.lock = false;
   this.loadingTime = Date.now();
+  this.lock = false;
+  console.log('load started');
 }
 
 Player.prototype.loadEnded = function(){
+  console.log('load ended');
   this.lock = true;
   this.loadingTime = Date.now() - this.loadingTime;
   this.setPath(this.loadingTime);
+  $(this).trigger("loaded");
 }
 
 Player.prototype.toggleFullScreen = function(){
