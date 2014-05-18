@@ -21,6 +21,7 @@ public:
 		this->_methods["likes"] = &VideoController::likesAction;
 		this->_methods["recommend"] = &VideoController::recommendAction;
 		this->_methods["like"] = &VideoController::ajaxLikeAction;
+		this->_methods["view"] = &VideoController::ajaxViewAction;
 	}
 
 	void indexAction() {

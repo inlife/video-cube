@@ -91,9 +91,8 @@ public:
 		Cooper::ParameterBag data = Cooper::Http::get();
 
 		VideoRepository vr;
-		vr.like(data.get("videoid"), userid);
 		std::cout << "Content-type: text/html\r\n\r\n";
-
+		vr.view(data.get("videoid"), userid);
 	}
 
 	std::vector<Video> getUserVideos(std::string userid) {

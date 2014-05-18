@@ -39,7 +39,17 @@
 			
 		    (function() {
 				if ($("#vc-player").length > 0) {
-					var player = new Player("vc-player", "{{videourl}}", "{{chunks}}");
+					var player = new Player("vc-player", "{{videourl}}", "{{chunks}}", function() {
+						$.ajax({
+				            url: '{{baseurl}}?name=video&action=view&type=ajax&videoid={{videoid}}',  
+				            type: 'POST',
+				            success: function(data) {}, 
+						    error: function(data) {},
+				            cache: false,
+				            contentType: false,
+				            processData: false
+				        });
+					});
 					player.startVideo();
 
 					//like
