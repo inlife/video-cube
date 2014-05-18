@@ -29,15 +29,14 @@ function Player(elementId , video_path, duration, watch){
   this.newTime = false;
   this.fullscreen = false;
   this.watch = watch;
-  this.watched = false;
 
   this.createDom();
 }
 Player.prototype.createVideo = function(itemId){
-  this.loadStarted();
   if(document.getElementById(itemId)){ // если уже такой открывок есть
     return false;
   }
+  this.loadStarted();
   videoItem = $("<video id='"+itemId+"' src='"+(this.getPath()+this.counter)+".mp4'></video>");
 
   videoItem.on('loadedmetadata', { player: this }, function(event){
@@ -64,10 +63,7 @@ Player.prototype.update = function() {
   console.log({lock: this.lock, part: this.counter, playable: this.playable, counter: this.partCounter, quality: this.quality, fullscreen: this.fullscreen});
 
   if(this.counter > (this.parts/2)){
-    if(!this.watched){
-      this.watch();
-      this.watched = true;
-    }
+    this.watch();
   }
   if(!this.lock) {
     this.partCounter--;
@@ -104,8 +100,9 @@ Player.prototype.update = function() {
       setTimeout(function(){ this.createVideo(this.newVideoId) }.bind(this), 1000);
     }
   }
-
-  this.partCounter++;
+  if(this.playable){
+    this.partCounter++;
+  }
   $('.player-controls.rewind').val(this.counter-1);
 }
 
@@ -116,10 +113,12 @@ Player.prototype.pauseVideo = function(){
   this.playable = false;
 }
 Player.prototype.playVideo = function(){
-  itemId = this.globalId+(this.counter-1);
-  item = document.getElementById(itemId);
-  item.play();
   this.playable = true;
+  if(!this.newTime){
+    itemId = this.globalId+(this.counter-1);
+    item = document.getElementById(itemId);
+    item.play();
+  }
 }
 
 Player.prototype.startVideo = function(){
