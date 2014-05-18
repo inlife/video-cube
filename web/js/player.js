@@ -20,7 +20,7 @@ function Player(elementId , video_path, duration, watch){
   this.globalId   = elementId;
   this.wrapperId  = 'video_player_wrapper';
   this.counter = 0;
-  this.partCounter = 0;
+  this.partCounter = 10;
   this.playable = true;
   this.inner = '';
   this.parts = parseInt(duration);
@@ -29,7 +29,7 @@ function Player(elementId , video_path, duration, watch){
   this.newTime = false;
   this.fullscreen = false;
   this.watch = watch;
-
+  this.watched = false;
   this.createDom();
 }
 Player.prototype.createVideo = function(itemId){
@@ -37,7 +37,7 @@ Player.prototype.createVideo = function(itemId){
     return false;
   }
   this.loadStarted();
-  videoItem = $("<video id='"+itemId+"' src='"+(this.getPath()+this.counter)+".mp4'></video>");
+  videoItem = $("<video id='"+itemId+"' src='"+(this.getPath()+this.counter)+".mp4?"+Math.random()+"'></video>");
 
   videoItem.on('loadedmetadata', { player: this }, function(event){
     event.data.player.loadEnded();
@@ -63,12 +63,15 @@ Player.prototype.update = function() {
   console.log({lock: this.lock, part: this.counter, playable: this.playable, counter: this.partCounter, quality: this.quality, fullscreen: this.fullscreen});
 
   if(this.counter > (this.parts/2)){
-    this.watch();
+    if(!this.watched){
+      this.watch();
+      this.watched = true;
+    }
   }
   if(!this.lock) {
     this.partCounter--;
   }
-  if((this.counter<this.parts)&&(this.partCounter%10==0)&&this.playable){
+  if((this.counter<this.parts)&&(this.partCounter>=10)&&this.playable){
     this.partCounter = 0;
 
     if(this.counter == 0 || this.newTime) {
@@ -150,7 +153,7 @@ Player.prototype.getPath = function(){
 }
 
 Player.prototype.goTo = function(value){
-  this.partCounter = 0;
+  this.partCounter = 10;
   this.hideVideo(this.globalId + (this.counter - 1));
   this.newTime = true;
   this.counter = parseInt(value);
