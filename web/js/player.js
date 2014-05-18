@@ -14,9 +14,9 @@
 
 function Player(elementId , video_path, duration, watch){
   this.videoPath  = video_path;
-  this.highPath   = this.videoPath+'720/';
-  this.mediumPath = this.videoPath+'360/';
-  this.poorPath   = this.videoPath+'240/';
+  this.highPath   = this.videoPath+'/720/';
+  this.mediumPath = this.videoPath+'/360/';
+  this.poorPath   = this.videoPath+'/240/';
   this.globalId   = elementId;
   this.wrapperId  = 'video_player_wrapper';
   this.counter = 0;
@@ -168,13 +168,14 @@ Player.prototype.goTo = function(value){
 Player.prototype.createDom = function(){
   $('#' + this.globalId).append('<div id="'+this.wrapperId+'"></div>')
   $('#' + this.wrapperId).append('<div id="player_videos"></div>')
-  $('#' + this.wrapperId).append('<div class="play-controls"></div>')
-  $('#' + this.wrapperId).append('<div class="rewind-controls"></div>')
-  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls play">▶</button>')
-  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls pause">||</button>')
-  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls fullscreen">⬚</button>')
-  $('#' + this.wrapperId + ' .play-controls').append('<input class="player-controls volume" type="range" min="0" max="100" value="70" />')
-  $('#' + this.wrapperId + ' .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
+  $('#' + this.wrapperId).append('<div class="controls"></div>')
+  $('#' + this.wrapperId + ' .controls').append('<div class="play-controls"></div>')
+  $('#' + this.wrapperId + ' .controls').append('<div class="rewind-controls"></div>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls play">▶</button>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls pause">||</button>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<button class="player-controls fullscreen">⬚</button>')
+  $('#' + this.wrapperId + ' .controls .play-controls').append('<input class="player-controls volume" type="range" min="0" max="100" value="70" />')
+  $('#' + this.wrapperId + ' .controls .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
 
   this.playerItem = document.getElementById('player_videos');
   this.setEvents()

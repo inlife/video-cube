@@ -1,17 +1,17 @@
+
 #player_videos {
   background-color: black;
   width: 100%;
-  height: 100%;
+  height: 90%
 }
 
 .play-controls {
-  position: absolute;
+  display: block;
   float: left;
-  display: inline-block;
-  width: 30%;
+  width: 50%;
 }
 .player-controls {
-  width: 30%;
+  width: 20%;
   padding: 3px;
   margin: 1px;
   border-radius: 3px;
@@ -21,24 +21,32 @@
 }
 
 .play {
-	background: url("../img/play.svg")  #fcee33 no-repeat center center;
-	background-size: 75% 75%;
+  background: url("../img/play.svg")  #fcee33 no-repeat center center;
+  background-size: 75% 75%;
 }
 
 .pause {
-	background: url("../img/pause.svg")  #fcee33 no-repeat center center;
-	background-size: 75% 75%;
+  background: url("../img/pause.svg")  #fcee33 no-repeat center center;
+  background-size: 75% 75%;
 }
 
 .fullscreen {
-	background: url("../img/fullscreen.svg")  #fcee33 no-repeat center center;
-	background-size: 75% 75%;
+  background: url("../img/fullscreen.svg")  #fcee33 no-repeat center center;
+  background-size: 75% 75%;
+}
+
+.volume {
+  width: 30%;
+  background-color: #FCEE33 !important;
+  height: 20px !important;
+  position: relative;
+  top: 5px;
 }
 
 .rewind-controls {
+  display: block;
   float: right;
-  display: inline-block;
-  width: 70%;
+  width: 50%;
 }
 
 .player-controls.rewind {
