@@ -164,9 +164,9 @@ Player.prototype.createDom = function(){
   $('#' + this.wrapperId).append('<div id="player_videos"></div>')
   $('#' + this.wrapperId).append('<div class="play-controls"></div>')
   $('#' + this.wrapperId).append('<div class="rewind-controls"></div>')
-  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls play">▶</button>')
-  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls pause">||</button>')
-  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls fullscreen">⬚</button>')
+  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls play"></button>')
+  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls pause"></button>')
+  $('#' + this.wrapperId + ' .play-controls').append('<button class="player-controls fullscreen"></button>')
   $('#' + this.wrapperId + ' .rewind-controls').append('<input class="player-controls rewind" type="range" min="0" max="'+this.parts+'" value="0" />')
 
   this.playerItem = document.getElementById('player_videos');

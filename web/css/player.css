@@ -16,8 +16,25 @@
   margin: 1px;
   border-radius: 3px;
   border: none;
-  background-color: #B9B9B9;
+  background-color: #FCEE33;
+  height: 30px;
 }
+
+.play {
+	background: url("../img/play.svg")  #fcee33 no-repeat center center;
+	background-size: 75% 75%;
+}
+
+.pause {
+	background: url("../img/pause.svg")  #fcee33 no-repeat center center;
+	background-size: 75% 75%;
+}
+
+.fullscreen {
+	background: url("../img/fullscreen.svg")  #fcee33 no-repeat center center;
+	background-size: 75% 75%;
+}
+
 .rewind-controls {
   float: right;
   display: inline-block;
@@ -26,7 +43,7 @@
 
 .player-controls.rewind {
   width: 100%;
-  background-color: #888;
+  background-color: #FCEE33;
 }
 
 input[type=range] {
@@ -37,7 +54,7 @@ input[type=range] {
 
 input[type="range"]::-webkit-slider-thumb {
      -webkit-appearance: none;
-    background-color: #444;
+    background-color: #fff;
     width: 10px;
     height: 20px;
 }
