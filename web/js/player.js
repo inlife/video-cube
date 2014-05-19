@@ -231,7 +231,7 @@ Player.prototype.toggleFullScreen = function(){
   var wrapper = $('#' + this.wrapperId);
   if(this.fullscreen){
     this.fullscreen = false;
-    wrapper.attr("style", "");
+    wrapper.attr("style", "height: 100%;");
   } else {
     this.fullscreen = true;
     wrapper = $('#' + this.wrapperId);
