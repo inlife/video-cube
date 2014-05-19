@@ -12,6 +12,7 @@
 //     player.startVideo();
 
 
+
 function Player(elementId , video_path, duration, watch){
   this.videoPath  = video_path;
   this.highPath   = this.videoPath+'720/';
@@ -237,7 +238,7 @@ Player.prototype.toggleFullScreen = function(){
   } else {
     this.fullscreen = true;
     wrapper = $('#' + this.wrapperId);
-    style = "position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 100;"
+    style = "position: fixed; background: #333; right: 0; bottom: 0; min-width: 100%; min-height: 100%; height: 300px; width: auto; z-index: 100;"
     wrapper.attr("style", style);
   }
 }
