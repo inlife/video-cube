@@ -145,6 +145,17 @@ public:
 			this->query(2, sql)
 		);
 	}
+
+	std::vector<Video> getOtherVideos(std::string videoid) {
+
+		std::string sql = "SELECT * FROM \"video\" WHERE 'id' != '";
+			sql.append( videoid );
+			sql.append( "' LIMIT 6" );
+		
+		return this->toObjects(
+			this->query(2, sql)
+		);
+	}
 	
 	std::string getViews(std::string videoid) {
 		std::string sql = "SELECT COUNT(*) FROM \"view\" WHERE videoid = '";

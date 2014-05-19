@@ -26,12 +26,13 @@ public:
 
 	void indexAction() {
 		Template btpl("base");
-		Template tpl("video/player");
+		VideoTemplate tpl("video/player");
 
 		VideoService vs;
 		Video video = vs.getPlayerVideo();
 
 		tpl.set("title", video.getTitle());
+		tpl.list("videos", vs.getOtherVideos(video));
 
 		btpl.set("content", tpl.render(false));
 
@@ -40,6 +41,7 @@ public:
 		btpl.set("chunks", video.getChunks());
 		btpl.set("views", vs.getViews(video));
 		btpl.set("likes", vs.getLikes(video));
+		
 
 		std::cout << btpl.render();
 	}

@@ -8,23 +8,9 @@
 		</div>
 		<div class="block sidebar">
 			<h3>Watch more:</h3>
-			<!--ul class="video-list">
-				<li><img src="{{baseurl}}{{preview}}" class="small-artwork" />
-					<a href="{{baseurl}}?name=video&action=index&id={{videoid}}">{{title}}</a>
-				</li>
-
-				<li><img src="{{baseurl}}{{preview}}" class="small-artwork" />
-					<a href="{{baseurl}}?name=video&action=index&id={{videoid}}">{{title}}</a>
-				</li>
-
-				<li><img src="{{baseurl}}{{preview}}" class="small-artwork" />
-					<a href="{{baseurl}}?name=video&action=index&id={{videoid}}">{{title}}</a>
-				</li>
-
-				<li><img src="{{baseurl}}{{preview}}" class="small-artwork" />
-					<a href="{{baseurl}}?name=video&action=index&id={{videoid}}">{{title}}</a>
-				</li>
-			</ul-->
+			<ul class="video-list">
+				{{videos}}
+			</ul>
 		</div>
 	</div>
 </article>

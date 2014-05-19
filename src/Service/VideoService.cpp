@@ -122,6 +122,11 @@ public:
 		return vr.getAllVideos();
 	}
 
+	std::vector<Video> getOtherVideos(Video video) {
+		VideoRepository vr;
+		return vr.getOtherVideos(video.getId());
+	}
+
 	std::string getViews(Video video) {
 		VideoRepository vr;
 		return vr.getViews(video.getId());
