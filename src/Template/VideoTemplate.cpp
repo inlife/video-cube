@@ -29,5 +29,21 @@ public:
 		}
 	}
 
+	void list(std::string name, std::vector<Video> videos) {
+		this->set(name, "");
+
+		std::size_t length = videos.size();
+
+		for(std::size_t i = 0; i < length; i++) {
+			Template line("main/_video-video-line");
+
+				line.set("id", videos[i].getId());
+				line.set("title", videos[i].getTitle());
+				line.set("preview", videos[i].getPreview());
+
+			this->add(name, line.render(false));
+		}
+	}
+
 	VideoTemplate(std::string name) : Template(name) {}
 };

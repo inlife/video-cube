@@ -202,13 +202,12 @@ article .block:last-child {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 280px !important;
-	padding: 30px 15px 0px 15px;
+	padding: 15px 15px 0px 15px;
 }
 
 .video h3 {
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	margin-bottom: 15px;
 }
 
 .sidebar ul {
@@ -329,7 +328,7 @@ input[type="submit"] {
 .like a {
 	margin-right: 15px;
 	display: inline-block;
-	margin-top: 0px;
+	margin-top: 7px;
 }
 
 .video h2 {
@@ -340,7 +339,7 @@ input[type="submit"] {
 	font-family: "Helvetica Neue", Tahoma, sans-serif;
 	text-align: right;
 	color: #576e85;
-	margin-top: 25px;
+	margin-top: 60px;
 	margin-right: 15px;
 }
 

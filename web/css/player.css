@@ -1,8 +1,23 @@
+.controls {
+  display: block;
+  width: 100%;
+  position: relative;
+  background: #333;
+  float: left;
+  overflow: hidden;
+  padding-right: 6px;
+  top: -39px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
 
 #player_videos {
-  background-color: black;
+  background-color: #333;
   width: 100%;
-  height: 90%
+  height: 100%;
+  display: block;
+  float: left;
 }
 
 .play-controls {
@@ -12,35 +27,57 @@
 }
 .player-controls {
   width: 20%;
-  padding: 3px;
-  margin: 1px;
+
+  padding: 9px 0px !important;
+  margin: 4px 3px !important;
   border-radius: 3px;
   border: none;
+  float: left;
+  display: block;
   background-color: #FCEE33;
-  height: 30px;
+  height: 30px !important;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 .play {
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   background: url("../img/play.svg")  #fcee33 no-repeat center center;
   background-size: 75% 75%;
 }
 
 .pause {
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   background: url("../img/pause.svg")  #fcee33 no-repeat center center;
   background-size: 75% 75%;
 }
 
 .fullscreen {
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   background: url("../img/fullscreen.svg")  #fcee33 no-repeat center center;
   background-size: 75% 75%;
 }
 
 .volume {
-  width: 30%;
   background-color: #FCEE33 !important;
-  height: 18px !important;
-  position: relative;
-  top: 5px;
+  width: 32%;
+  height: 30px !important;
+  margin-top: 3px;
+  float: right;
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 .rewind-controls {
@@ -53,6 +90,8 @@
   width: 100%;
   background-color: #FCEE33;
   height: 26px;
+  margin: 4px 3px;
+  float: left;
 }
 
 input[type=range] {
@@ -67,3 +106,4 @@ input[type="range"]::-webkit-slider-thumb {
     width: 10px;
     height: 20px;
 }
+
